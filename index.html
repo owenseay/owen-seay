@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owen Seay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* -- top bar -- */
+  .top-bar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 14px 20px;
+    background: #1a1a1a;
+  }
+
+  .top-bar span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  @media (max-width: 500px) {
+    .top-bar { gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .top-bar span { font-size: 10px; letter-spacing: 1.5px; }
+  }
+
+  /* -- hero photo -- */
+  .hero {
+    width: 100%;
+    max-height: 70vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(transparent, #fff);
+    pointer-events: none;
+  }
+
+  /* -- thought bubble -- */
+  .thought-bubble {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 24px;
+    z-index: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .thought-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    letter-spacing: 0.2px;
+  }
+
+  .thought-cursor {
+    display: inline-block;
+    width: 1.5px;
+    height: 16px;
+    background: #333;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+    animation: blink 0.8s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* -- content -- */
+  .content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+  }
+
+  .intro {
+    margin: -40px 0 56px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .intro h1 {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .intro p {
+    font-size: 16px;
+    color: #777;
+    letter-spacing: 0.2px;
+  }
+
+  /* -- things -- */
+  .things {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .thing {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .thing:hover {
+    border-color: #ccc;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .thing-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: #f5f5f5;
+    padding: 6px;
+  }
+
+  .thing-emoji {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .thing-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+
+  .thing-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #888;
+  }
+
+  .thing-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .thing-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .thing-links a:hover {
+    border-color: #1a1a1a;
+  }
+
+  /* -- footer -- */
+  .footer {
+    font-size: 13px;
+  }
+
+  .footer a {
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .footer a:hover {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+  }
+
+  /* -- responsive -- */
+  @media (max-width: 500px) {
+    .hero { max-height: 50vh; }
+    .intro h1 { font-size: 28px; }
+    .content { padding: 0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>Web Pages</span>
+    <span>Apps & Tools</span>
+    <span>Experiments</span>
+    <span>Things in General</span>
+  </div>
+
+  <div class="hero">
+    <img src="corn_sack_frames.webp" alt="Owen">
+    <div class="thought-bubble">
+      <span class="thought-text" id="thought"></span><span class="thought-cursor"></span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="intro">
+      <h1>Owen Seay</h1>
+      <p>Turning thoughts into things.</p>
+    </div>
+
+    <div class="things">
+      <div class="thing">
+        <img class="thing-icon" src="pistol-icon.png" alt="Tap 2 Shoot">
+        <div>
+          <div class="thing-name">Tap 2 Shoot</div>
+          <div class="thing-desc">Bought a pistol on Friday, recorded it at the range Saturday, built this when I got home. Now I can shoot it anywhere.</div>
+          <div class="thing-links">
+            <a href="https://shot-sim.netlify.app" target="_blank">Try it</a>
+            <a href="/shot-sim/">Story</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🪭</div>
+        <div>
+          <div class="thing-name">Ceiling Fan</div>
+          <div class="thing-desc">A ceiling fan with a wall switch. Click the switch to change the speed. One of the settings is off.</div>
+          <div class="thing-links">
+            <a href="https://ceiling-fan.netlify.app" target="_blank">Try it</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🪑</div>
+        <div>
+          <div class="thing-name">The Chairverse</div>
+          <div class="thing-desc">I generated a list of 73 different types of chairs with ChatGPT. Then I handed the list to Antigravity and told it to build the ultimate chair experience.</div>
+          <div class="thing-links">
+            <a href="https://chairverse.netlify.app" target="_blank">Visit</a>
+            <a href="https://github.com/owenseay/the-chairverse" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🍌</div>
+        <div>
+          <div class="thing-name">Banana Portal</div>
+          <div class="thing-desc">I painted a banana with watercolor and stuck a sticker on it, then built an app that cycles through five distinct animation modes, each applying unique motion behaviors to bunches of my bananas. Click the banana to cycle through them. (drift > spin > jitter > stretch > popcorn > breeze)</div>
+          <div class="thing-links">
+            <a href="https://banana-portal.netlify.app" target="_blank">Try it</a>
+            <a href="https://github.com/owenseay/banana-portal" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🖥️</div>
+        <div>
+          <div class="thing-name">Micro Center Stock Checker</div>
+          <div class="thing-desc">I saved $212.93 on a Mac mini by getting Best Buy to price match Micro Center, then I built a dashboard that shows the Mac mini inventory across all Micro Center stores (updates every ~hour) so you don't have to manually toggle between them.</div>
+          <div class="thing-links">
+            <a href="https://owenseay.github.io/stock-checker/" target="_blank">Visit</a>
+            <a href="https://github.com/owenseay/stock-checker" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🍩</div>
+        <div>
+          <div class="thing-name">Donut Cam</div>
+          <div class="thing-desc">A prototype that would allow me to keep an eye on the local donut case.</div>
+          <div class="thing-links">
+            <a href="https://donut-cam.netlify.app" target="_blank">Try it</a>
+            <a href="https://donutconnection.com" target="_blank">The donut shop</a>
+            <a href="https://github.com/owenseay/donut-cam" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="thing">
+        <div class="thing-emoji">🏭</div>
+        <div>
+          <div class="thing-name">E&H Bridges</div>
+          <div class="thing-desc">I built a dedicated product page for a local manufacturer in Charleston, WV. Includes scroll-triggered SVG animations showing how a stress-laminated timber bridge deck gets assembled step by step.</div>
+          <div class="thing-links">
+            <a href="https://eandhbridges.com" target="_blank">Visit</a>
+            <a href="https://eandhbridges.com/bridge-model-animation/" target="_blank">Bridge animations</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="mailto:owen@owenseay.com">owen@owenseay.com</a>
+    </div>
+  </div>
+
+<script>
+  const thoughts = [
+    "why do hospitals smell like that",
+    "a vending machine but for soil",
+    "wait how do birds sleep",
+    "the opposite of a door",
+    "concrete tastes like something probably",
+    "what year did forks happen",
+    "a parking lot is just a field with rules",
+    "glue but emotional",
+    "do fish get thirsty",
+    "the sound gravel makes when you're unsure",
+    "someone invented the staircase and just moved on",
+    "magnets don't make any sense",
+    "a map of every place I've stood",
+    "rubber bands remember their shape",
+    "the last person to use a payphone",
+    "what's heavier silence or fog",
+    "corners are just walls disagreeing",
+    "a clock for something other than time",
+    "sand is just patient rocks",
+    "the texture of tuesday",
+    "who decided which side of the road",
+    "a bridge is just a floor with ambition",
+    "elevators are rooms that move",
+    "cold water sounds different than hot water",
+    "the space between a thought and a thing",
+    "batteries die but where do they go",
+    "a window is a wall that gave up",
+    "the weight of an empty room",
+    "shoes remember your feet",
+    "what does the bottom of the ocean smell like",
+    "a shelf is just a floor for objects",
+    "the color of 3am",
+    "someone had to name orange twice",
+    "what if mirrors are just tired",
+    "the sound a shadow would make",
+    "pillows are just soft furniture",
+    "who was the first person to wave",
+    "a hallway is a room that forgot to stop",
+    "ice is just formal water",
+    "the last dinosaur didn't know",
+    "a ceiling is a floor for nobody",
+    "pockets are rooms for hands",
+    "what if gravity just stopped for a second",
+    "the person who invented zero had nothing",
+    "a knot is just rope with anxiety",
+    "rain but horizontal",
+    "the exact center of a forest",
+    "what do ants think clouds are",
+    "a cup is a bowl with ambition",
+    "the last thing edison forgot",
+    "somewhere a door is opening right now",
+    "socks are just foot bags",
+    "the feeling of almost remembering",
+    "a fence is a wall with gaps on purpose",
+    "steam is just water that got excited",
+    "what if trees are bored",
+    "the oldest water on earth",
+    "a tunnel is a bridge that gave up on the view",
+    "somebody somewhere is blinking right now",
+    "what if corners didn't exist",
+    "a key is just a tiny sculpture that opens things",
+    "the distance between two thoughts",
+    "paper used to be a tree and nobody talks about it",
+    "an attic is just a house's hat",
+    "the sound of one hand doing nothing",
+    "what if roads are just long driveways",
+    "a candle is a slow light",
+    "the first person to sneeze must have been terrified",
+    "a basement is a house's secret",
+    "dust is just everything slowly",
+    "what if chairs could walk",
+    "a thermos doesn't know if it's hot or cold",
+    "the space between two buildings",
+    "somebody built the first wall and then what",
+    "a puddle is a temporary lake",
+    "the color of a sound you forgot",
+    "what if escalators are just lazy stairs",
+    "a calendar is a countdown to nothing specific",
+    "the first person to find a cave",
+    "a rug is just a blanket for the floor",
+    "what if ceilings were transparent",
+    "the weight of a promise",
+    "a roof is just an upside down floor",
+    "someone is always the farthest person north",
+    "a lamp is just a tiny sun on a stick",
+    "the smell of the number seven",
+    "what if nothing was round",
+    "a spoon is just a tiny bowl with a handle",
+    "the first person to see snow",
+    "somewhere a lightbulb just burned out",
+    "a drawer is just a box that lives in furniture",
+    "the feeling right before you forget something",
+    "a zipper is just teeth that cooperate",
+    "what if air had a flavor",
+    "a staircase is just a ramp that gave up",
+    "the last payphone is somewhere right now",
+    "a towel is just a blanket for water",
+    "what if wheels were square",
+    "the oldest door still in use",
+    "a cloud is just sky furniture",
+    "the speed of forgetting",
+    "what if paint could hear",
+    "a mattress is just a body shelf",
+    "the first person to see their reflection",
+    "a whistle is just a scream with manners",
+    "what if fences could talk",
+    "the temperature of a secret",
+    "a chimney is just a tube for smoke",
+    "what if silence had a shape",
+    "a backpack is just a wearable room",
+    "the exact middle of the night",
+    "a hinge is just a joint for doors",
+    "what if you could pour a thought into a cup",
+    "a compass doesn't know where you want to go",
+    "the last person to lick a stamp",
+    "a blade of grass doesn't know about the lawn",
+    "what if walls could remember",
+    "the smell of distance",
+    "a receipt is just a tiny story about money",
+    "what if all clocks stopped for one second",
+    "a shoelace is just a tiny rope with a job",
+    "the weight of attention",
+    "a sidewalk is just a skinny road for people",
+    "what if ladders went down",
+    "somewhere right now a door is stuck",
+    "a handle is just something to hold that holds something",
+    "what if every floor was slightly tilted",
+    "a bookmark is just a flat finger",
+    "the sound of a room with nobody in it",
+    "a trash can is just a container with low self-esteem",
+    "what if you could hear colors growing",
+    "a driveway is just a road that ends at your house",
+    "the first person to be bored",
+    "a button is just a tiny lever",
+    "what if nothing had edges",
+    "a mailbox is just a tiny house for paper",
+    "the feeling of a word you can't find",
+    "a curtain is just a soft wall",
+    "what if tables could float",
+    "a lid is just a door for containers",
+    "the shape of next week",
+    "a garage is just a bedroom for cars",
+    "what if every wall was a different color",
+    "a gutter is just a tiny river on your house",
+    "somewhere a pen just ran out of ink",
+    "a pillar is just a wall that got thin",
+    "the temperature of forgetting",
+    "a balcony is just a floor with a view",
+    "what if ceilings were lower on tuesdays",
+    "a doorbell is just a button that yells",
+    "the distance between here and almost here",
+  ];
+
+  const el = document.getElementById('thought');
+  let queue = [];
+
+  function pick() {
+    if (queue.length === 0) {
+      queue = [...thoughts];
+      for (let i = queue.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [queue[i], queue[j]] = [queue[j], queue[i]];
+      }
+    }
+    return queue.pop();
+  }
+
+  async function type(text) {
+    for (let i = 0; i <= text.length; i++) {
+      el.textContent = text.slice(0, i);
+      await new Promise(r => setTimeout(r, 45 + Math.random() * 40));
+    }
+    await new Promise(r => setTimeout(r, 1800));
+    for (let i = text.length; i >= 0; i--) {
+      el.textContent = text.slice(0, i);
+      await new Promise(r => setTimeout(r, 25));
+    }
+    await new Promise(r => setTimeout(r, 400));
+  }
+
+  async function run() {
+    while (true) { await type(pick()); }
+  }
+
+  run();
+</script>
+</body>
+</html>
