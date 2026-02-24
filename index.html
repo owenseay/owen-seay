@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Owen Seay — vibe coding my brains out. Projects, experiments, and things that probably didn't need to exist.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <title>Owen Seay</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: #fff;
@@ -78,6 +81,7 @@
     -webkit-backdrop-filter: blur(10px);
     padding: 10px 20px;
     border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     z-index: 1;
     pointer-events: none;
     white-space: nowrap;
@@ -150,15 +154,32 @@
   .thing {
     position: absolute;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, filter 0.2s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .thing:nth-child(1) { animation-delay: 0.05s; }
+  .thing:nth-child(2) { animation-delay: 0.1s; }
+  .thing:nth-child(3) { animation-delay: 0.15s; }
+  .thing:nth-child(4) { animation-delay: 0.2s; }
+  .thing:nth-child(5) { animation-delay: 0.25s; }
+  .thing:nth-child(6) { animation-delay: 0.3s; }
+  .thing:nth-child(7) { animation-delay: 0.35s; }
+  .thing:nth-child(8) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .thing:hover {
     transform: scale(1.2);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
   }
 
   .thing-icon {
@@ -234,6 +255,7 @@
 
     .thing:hover {
       transform: scale(1.1);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
     }
   }
 </style>
