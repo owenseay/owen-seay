@@ -208,6 +208,24 @@
     .hero { max-height: 50vh; }
     .intro h1 { font-size: 28px; }
     .content { padding: 0 20px 60px; }
+
+    .things {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      height: auto;
+    }
+
+    .thing {
+      position: static !important;
+      rotate: none !important;
+      transform: none;
+    }
+
+    .thing:hover {
+      transform: scale(1.1);
+    }
   }
 </style>
 </head>
