@@ -154,7 +154,7 @@
   .thing {
     position: absolute;
     text-decoration: none;
-    transition: transform 0.2s ease, filter 0.2s ease, translate 0.2s ease;
+    transition: transform 0.2s ease, translate 0.2s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -179,7 +179,11 @@
 
   .thing:hover {
     transform: scale(1.2);
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+  }
+
+  .thing:hover .thing-icon,
+  .thing:hover .thing-emoji {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   }
 
   .thing-icon {
@@ -189,6 +193,7 @@
     object-fit: contain;
     background: #f5f5f5;
     padding: 8px;
+    transition: box-shadow 0.2s ease;
   }
 
   .thing-emoji {
@@ -200,6 +205,7 @@
     align-items: center;
     justify-content: center;
     font-size: 36px;
+    transition: box-shadow 0.2s ease;
   }
 
   .thing-label {
@@ -255,7 +261,11 @@
 
     .thing:hover {
       transform: scale(1.1);
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    }
+
+    .thing:hover .thing-icon,
+    .thing:hover .thing-emoji {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
   }
 </style>
