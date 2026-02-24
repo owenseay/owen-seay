@@ -154,7 +154,7 @@
   .thing {
     position: absolute;
     text-decoration: none;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    transition: transform 0.2s ease, filter 0.2s ease, translate 0.2s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -173,8 +173,8 @@
   .thing:nth-child(8) { animation-delay: 0.4s; }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; translate: 0 16px; }
+    to { opacity: 1; translate: 0 0; }
   }
 
   .thing:hover {
