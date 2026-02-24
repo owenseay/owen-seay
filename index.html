@@ -49,10 +49,11 @@
 
   .hero img {
     width: 100%;
-    height: 100%;
+    height: 130%;
     object-fit: cover;
     object-position: center 30%;
     display: block;
+    will-change: transform;
   }
 
   .hero::after {
@@ -237,8 +238,8 @@
   <div class="top-bar">
     <span>Web Pages</span>
     <span>Apps & Tools</span>
-    <span>Experiments</span>
-    <span>Things in General</span>
+    <span>Design</span>
+    <span>Projects</span>
   </div>
 
   <div class="hero">
@@ -526,6 +527,17 @@
   }
 
   run();
+
+  // Parallax hero
+  const heroImg = document.querySelector('.hero img');
+  const hero = document.querySelector('.hero');
+  window.addEventListener('scroll', () => {
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom > 0) {
+      const speed = 0.4;
+      heroImg.style.transform = `translateY(${window.scrollY * speed}px)`;
+    }
+  }, { passive: true });
 </script>
 </body>
 </html>
