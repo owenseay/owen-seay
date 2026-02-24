@@ -293,7 +293,7 @@
     </div>
 
     <div class="footer">
-      <a href="mailto:hello@owenseay.com">hello@owenseay.com</a>
+      <a id="email-link"></a>
     </div>
   </div>
 
@@ -495,6 +495,12 @@
       heroImg.style.transform = `translateY(${window.scrollY * speed}px)`;
     }
   }, { passive: true });
+
+  // Obfuscate email from bots
+  const e = document.getElementById('email-link');
+  const u = 'hello'; const d = 'owenseay.com';
+  e.href = 'mai' + 'lto:' + u + '@' + d;
+  e.textContent = u + '@' + d;
 </script>
 </body>
 </html>
