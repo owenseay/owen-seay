@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Picture-Building &mdash; Owen Seay</title>
+  <meta name="description" content="You build pictures to make sense of things that matter to you. AI is just a new set of tools." />
+  <meta property="og:title" content="Picture-Building" />
+  <meta property="og:description" content="You build pictures to make sense of things that matter to you. AI is just a new set of tools." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Picture-Building" />
+  <meta name="twitter:description" content="You build pictures to make sense of things that matter to you. AI is just a new set of tools." />
+  <style>
+    :root {
+      --bg: #f6f8ff;
+      --fg: #1a1a2e;
+      --fg-light: #555;
+      --accent-cyan: #6bf0ff;
+      --accent-green: #a4ff7a;
+      --accent-yellow: #ffea7a;
+      --accent-orange: #ff9e7a;
+      --accent-purple: #b07aff;
+      --accent-pink: #ff7ae1;
+      --accent-teal: #7affc9;
+      --section-pad: clamp(60px, 10vw, 120px);
+      --content-max: 800px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px clamp(20px, 4vw, 48px);
+      background: rgba(246, 248, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      transition: opacity 0.3s;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    nav .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: var(--fg); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--section-pad) 24px;
+      overflow: hidden;
+    }
+    .hero canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+    .hero-emoji {
+      font-size: clamp(48px, 8vw, 72px);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink), var(--accent-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: clamp(18px, 2.4vw, 24px);
+      line-height: 1.5;
+      color: var(--fg-light);
+      font-weight: 400;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+    .hero .scroll-hint {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.3);
+      animation: pulse-down 2s ease-in-out infinite;
+    }
+    @keyframes pulse-down {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(6px); opacity: 0.7; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: var(--section-pad) 24px;
+    }
+    .section-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    /* ── THE PROBLEM ── */
+    .problem {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .problem .section-inner {
+      max-width: 680px;
+      text-align: center;
+    }
+    .problem p {
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.7;
+      color: var(--fg-light);
+    }
+    .problem p strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      color: var(--fg-light);
+      max-width: 620px;
+    }
+    .section-body p + p {
+      margin-top: 1em;
+    }
+
+    /* ── EVOLUTION TIMELINE ── */
+    .evolution {
+      padding-bottom: 0;
+    }
+    .evolution .section-inner {
+      max-width: 960px;
+      text-align: center;
+      margin-bottom: clamp(40px, 6vw, 80px);
+    }
+    .evolution .section-body {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .eras {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(24px, 4vw, 48px);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .era {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      max-height: 80vh;
+    }
+    .era canvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    .era-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: clamp(20px, 4vw, 48px) clamp(24px, 4vw, 48px);
+      background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+    }
+    .era-name {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .era-desc {
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: var(--fg-light);
+      font-weight: 400;
+    }
+
+    /* ── THE CONCEPT ── */
+    .concept {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .concept .section-inner {
+      max-width: 720px;
+    }
+    .concept-text p {
+      color: var(--fg-light);
+    }
+    .concept-text p + p {
+      margin-top: 1.2em;
+    }
+    .concept-text p strong {
+      color: var(--fg);
+    }
+
+    /* ── THE LOOP (How I AI) ── */
+    .loop {
+      background: var(--bg);
+    }
+    .loop .section-inner {
+      max-width: 900px;
+    }
+    .loop-intro {
+      max-width: 680px;
+      margin: 0 auto clamp(40px, 6vw, 64px);
+    }
+    .loop-intro p {
+      color: var(--fg-light);
+    }
+    .loop-vis {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .loop-vis canvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+    .loop-phases {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .loop-phase {
+      position: absolute;
+      pointer-events: auto;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.45);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease, background 0.8s ease;
+      opacity: 0.45;
+      transform: scale(0.97);
+    }
+    .loop-phase.active {
+      opacity: 1;
+      transform: scale(1);
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    /* Top-left: Frame */
+    .loop-phase:nth-child(1) {
+      top: 16%;
+      left: -2%;
+    }
+    /* Top-right: Collaborate */
+    .loop-phase:nth-child(2) {
+      top: 16%;
+      right: -2%;
+    }
+    /* Bottom-right: Picture */
+    .loop-phase:nth-child(3) {
+      bottom: 28%;
+      right: -5%;
+    }
+    /* Bottom-left: Progress */
+    .loop-phase:nth-child(4) {
+      bottom: 28%;
+      left: -5%;
+    }
+    .loop-phase h3 {
+      font-size: clamp(13px, 1.8vw, 17px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3px;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+    .phase-num {
+      display: inline-block;
+      font-size: 0.75em;
+      font-weight: 600;
+      opacity: 0.4;
+      margin-right: 4px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+    .loop-phase.active .phase-num {
+      opacity: 0.7;
+    }
+    .loop-phase .phase-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+      transition: box-shadow 0.8s ease;
+    }
+    .loop-phase.active .phase-dot {
+      box-shadow: 0 0 8px 2px currentColor;
+    }
+    .loop-phase:nth-child(1) .phase-dot { background: var(--accent-cyan); color: var(--accent-cyan); }
+    .loop-phase:nth-child(2) .phase-dot { background: var(--accent-green); color: var(--accent-green); }
+    .loop-phase:nth-child(3) .phase-dot { background: var(--accent-yellow); color: var(--accent-yellow); }
+    .loop-phase:nth-child(4) .phase-dot { background: var(--accent-purple); color: var(--accent-purple); }
+    .loop-phase p {
+      font-size: clamp(10px, 1.3vw, 13px);
+      color: var(--fg-light);
+      line-height: 1.4;
+      max-width: 160px;
+      margin: 0;
+    }
+    /* Timeline bar */
+    .loop-timeline {
+      position: relative;
+      width: 72%;
+      margin: 32px auto 0;
+      padding-bottom: 22px;
+    }
+    .timeline-track {
+      position: relative;
+      height: 2px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .timeline-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      border-radius: 1px;
+      background: linear-gradient(90deg,
+        var(--accent-cyan), var(--accent-green),
+        var(--accent-yellow), var(--accent-purple));
+      transition: width 0.08s linear;
+    }
+    .timeline-nodes {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      top: -4px;
+    }
+    .timeline-node {
+      position: relative;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.12);
+      transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+    }
+    .timeline-node.lit {
+      background: var(--fg);
+      transform: scale(1.3);
+      box-shadow: 0 0 6px 1px rgba(100,100,140,0.25);
+    }
+    .timeline-node::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      letter-spacing: 0.03em;
+      color: rgba(0,0,0,0.25);
+      white-space: nowrap;
+      transition: color 0.4s ease;
+    }
+    .timeline-node.lit::after {
+      color: var(--fg-light);
+    }
+
+    @media (max-width: 600px) {
+      .loop-phases {
+        position: relative !important;
+        inset: auto !important;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 24px;
+        pointer-events: auto;
+      }
+      .loop-phase,
+      .loop-phase:nth-child(1),
+      .loop-phase:nth-child(2),
+      .loop-phase:nth-child(3),
+      .loop-phase:nth-child(4) {
+        position: relative !important;
+        top: auto !important; bottom: auto !important;
+        left: auto !important; right: auto !important;
+        padding: 10px 12px;
+        border-radius: 10px;
+        opacity: 0.55;
+        transform: none;
+      }
+      .loop-phase.active {
+        transform: none;
+      }
+      .loop-phase p {
+        font-size: 11px;
+        max-width: none;
+      }
+      .loop-vis { max-width: 400px; }
+      .loop-timeline { width: 85%; }
+      .timeline-node::after { font-size: 7px; }
+    }
+
+    /* ── EXAMPLE ── */
+    .example {
+      background: #fff;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .example .section-inner {
+      max-width: 780px;
+    }
+    .example-intro {
+      margin-bottom: clamp(32px, 5vw, 56px);
+    }
+    .example-intro p {
+      color: var(--fg-light);
+    }
+    .example-steps {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+    .example-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .example-step:last-child { border-bottom: none; }
+    .example-step .step-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .example-step:nth-child(1) .step-icon { background: rgba(107, 240, 255, 0.15); }
+    .example-step:nth-child(2) .step-icon { background: rgba(164, 255, 122, 0.15); }
+    .example-step:nth-child(3) .step-icon { background: rgba(255, 234, 122, 0.15); }
+    .example-step:nth-child(4) .step-icon { background: rgba(176, 122, 255, 0.15); }
+    .example-step h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .example-step p {
+      font-size: 15px;
+      color: var(--fg-light);
+      line-height: 1.55;
+    }
+    .example-punchline {
+      margin-top: clamp(32px, 5vw, 48px);
+      padding: clamp(24px, 4vw, 40px);
+      background: var(--bg);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .example-punchline p {
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.6;
+      color: var(--fg);
+      font-weight: 500;
+    }
+    .example-punchline p strong {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── KICKER ── */
+    .kicker {
+      text-align: center;
+      padding: clamp(80px, 14vw, 160px) 24px;
+    }
+    .kicker .section-inner {
+      max-width: 640px;
+    }
+    .kicker blockquote {
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      border: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .kicker .attr {
+      font-size: 14px;
+      color: var(--fg-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: rgba(0,0,0,0.3);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav .nav-links { gap: 16px; }
+      nav .nav-links a { font-size: 11px; }
+      .loop-steps { grid-template-columns: 1fr; }
+      .example-step { grid-template-columns: 44px 1fr; gap: 12px; }
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Owen Seay</a>
+    <ul class="nav-links">
+      <li><a href="#evolution">The Evolution</a></li>
+      <li><a href="#concept">The Concept</a></li>
+      <li><a href="#loop">The Loop</a></li>
+      <li><a href="#example">Example</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content fade-in">
+      <div class="hero-emoji">&#x1F5FF;</div>
+      <h1><span class="gradient-text">Picture-Building</span></h1>
+      <p class="subtitle">You build pictures to make sense of things that matter to you&mdash;work, school, business, relationships. AI is just a new set of tools.</p>
+      <div class="scroll-hint">&darr; Scroll</div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="problem">
+    <div class="section-inner fade-in">
+      <p>New tools every week. New hacks. New prompting tricks. Everyone&rsquo;s racing to learn what buttons to press.</p>
+      <p style="margin-top:1em;"><strong>But the best way to understand AI is to completely forget about AI.</strong></p>
+    </div>
+  </section>
+
+  <!-- THE EVOLUTION -->
+  <section class="evolution" id="evolution">
+    <div class="section-inner fade-in">
+      <div class="section-label">The Evolution</div>
+      <h2 class="section-title">Zoom out.</h2>
+      <div class="section-body">
+        <p>Before AI, before the internet, before books and the written word, humans have needed to make sense of the world around them.<br>The tools changed. The process hasn&rsquo;t.</p>
+      </div>
+    </div>
+
+    <div class="eras">
+      <!-- Speech -->
+      <div class="era fade-in">
+        <canvas id="era-speech" data-era="speech"></canvas>
+        <div class="era-overlay">
+          <div class="era-name">Speech</div>
+          <div class="era-desc">Making sense of the world required firsthand experience, or finding someone willing to talk. Pictures were built slowly, locally, and never the same twice.</div>
+        </div>
+      </div>
+
+      <!-- Writing -->
+      <div class="era fade-in">
+        <canvas id="era-writing" data-era="writing"></canvas>
+        <div class="era-overlay">
+          <div class="era-name">Writing</div>
+          <div class="era-desc">Information could be captured and revisited. For the first time, you could build on someone else&rsquo;s picture without them being in the room, but you still had to find what they wrote.</div>
+        </div>
+      </div>
+
+      <!-- Internet -->
+      <div class="era fade-in">
+        <canvas id="era-internet" data-era="internet"></canvas>
+        <div class="era-overlay">
+          <div class="era-name">Internet</div>
+          <div class="era-desc">Everything connected. The raw material for any picture you wanted to build was suddenly at your fingertips. But you still had to sort through it yourself.</div>
+        </div>
+      </div>
+
+      <!-- AI -->
+      <div class="era fade-in">
+        <canvas id="era-ai" data-era="ai"></canvas>
+        <div class="era-overlay">
+          <div class="era-name">AI</div>
+          <div class="era-desc">For the first time, the tool doesn&rsquo;t just hand you raw materials. It builds and composes the picture with you.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CONCEPT -->
+  <section class="concept" id="concept">
+    <div class="section-inner fade-in">
+      <div class="section-label">The Concept</div>
+      <h2 class="section-title">You're building a picture.</h2>
+      <div class="concept-text">
+        <p>Since the dawn of time, humans have built pictures around things that are unclear to us. Which plants can we eat, and which ones are poisonous? Which direction should we set sail? How fast does light travel?</p>
+        <p>We gather information until a clear picture has formed in our mind. Then we move forward and a new problem, question, or challenge arises.</p>
+        <p>Books created an option beyond seeking out another human. Libraries organized those books. The internet digitized the library. Google indexed the internet.</p>
+        <p><strong style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">And now AI blends it all together.</strong></p>
+        <p>The result is a brand new way to do what we&rsquo;ve always done. New tools. New language. New methods. New possibilities.</p>
+        <p><strong>One process.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LOOP (How I AI) -->
+  <section class="loop" id="loop">
+    <div class="section-inner">
+      <div class="loop-intro fade-in">
+        <div class="section-label">The Loop</div>
+        <h2 class="section-title">The process.</h2>
+        <p>No matter how complex or simple, every picture follows the same cycle. Something is unclear. You gather what you need. Clarity forms. You move forward.</p>
+      </div>
+
+      <div class="loop-vis fade-in">
+        <canvas id="loop-canvas"></canvas>
+        <div class="loop-timeline">
+          <div class="timeline-track">
+            <div class="timeline-fill"></div>
+          </div>
+          <div class="timeline-nodes">
+            <div class="timeline-node" data-label="Seconds"></div>
+            <div class="timeline-node" data-label="Minutes"></div>
+            <div class="timeline-node" data-label="Hours"></div>
+            <div class="timeline-node" data-label="Days"></div>
+            <div class="timeline-node" data-label="Weeks"></div>
+            <div class="timeline-node" data-label="Years"></div>
+          </div>
+        </div>
+        <div class="loop-phases">
+          <div class="loop-phase active">
+            <h3><span class="phase-num">1</span><span class="phase-dot"></span>Focus</h3>
+            <p>Something&rsquo;s unclear. A problem, question, or challenge enters your mind and you focus on it.</p>
+          </div>
+          <div class="loop-phase">
+            <h3><span class="phase-num">2</span><span class="phase-dot"></span>Gather</h3>
+            <p>You gather information. Reading, asking, testing, seeking. Each input adds to the picture.</p>
+          </div>
+          <div class="loop-phase">
+            <h3><span class="phase-num">3</span><span class="phase-dot"></span>Clarity</h3>
+            <p>A clear picture forms. You see the answer, the path, the decision. It clicks.</p>
+          </div>
+          <div class="loop-phase">
+            <h3><span class="phase-num">4</span><span class="phase-dot"></span>Progress</h3>
+            <p>You act on it. Move forward. And the next problem, question, or challenge appears.</p>
+          </div>
+        </div>
+        <div class="loop-footer fade-in" style="max-width:620px; margin:clamp(32px,5vw,48px) auto 0; text-align:center;">
+          <p style="color:var(--fg-light);">This cycle runs at every scale. From a thirty-second decision to a decade-long career. The pictures change. The process doesn&rsquo;t.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLE -->
+  <section class="example" id="example">
+    <div class="section-inner">
+      <div class="example-intro fade-in">
+        <div class="section-label">See It</div>
+        <h2 class="section-title">You already do this.</h2>
+        <p>Before AI. Before the internet. Before you ever opened a laptop. You've been picture-building your entire life. Here&rsquo;s one you probably ran this morning.</p>
+      </div>
+
+      <div class="example-steps fade-in">
+        <div class="example-step">
+          <div class="step-icon">&#x1F327;</div>
+          <div>
+            <h4>You look outside</h4>
+            <p>Tree branches swaying, grey sky. A picture of the day&rsquo;s weather starts forming.</p>
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="step-icon">&#x1F4F1;</div>
+          <div>
+            <h4>You check the forecast</h4>
+            <p>Rain at 10, clearing by 2. The picture sharpens.</p>
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="step-icon">&#x23F0;</div>
+          <div>
+            <h4>You look at the clock</h4>
+            <p>Now time is part of the picture. You&rsquo;ve got constraints.</p>
+          </div>
+        </div>
+        <div class="example-step">
+          <div class="step-icon">&#x1F454;</div>
+          <div>
+            <h4>You pick an outfit</h4>
+            <p>Weather, schedule, mood. The picture resolves. Decision made.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-punchline fade-in">
+        <p>A few inputs. Sixty seconds. A decision that moved you forward. <strong style="white-space:nowrap;">That&rsquo;s picture-building.</strong> And you&rsquo;ve been doing it every day, your whole life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KICKER -->
+  <section class="kicker">
+    <div class="section-inner fade-in">
+      <blockquote>The same process that helped you pick out an outfit this morning, brought us from the stone age to this moment.</blockquote>
+      <p style="margin-top:24px; font-size:clamp(18px,2.5vw,22px); color:var(--fg-light);">What picture will you build?</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Picture-Building &middot; Owen Seay</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SCRIPTS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <script>
+    // ── Intersection Observer for fade-in ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Shared constants ──
+    const COLORS = ["#6bf0ff","#a4ff7a","#ffea7a","#ff9e7a","#b07aff","#ff7ae1","#7affc9"];
+    const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+    const lerp = (a,b,t) => a + (b - a) * t;
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+
+    // ── Canvas visibility tracking ──
+    const canvasVisible = new Map();
+    const canvasObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        canvasVisible.set(entry.target, entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+
+    function trackCanvas(canvas) {
+      canvasVisible.set(canvas, true);
+      canvasObserver.observe(canvas);
+    }
+
+    function gridForSize(w, h, minCells, maxCells, divisor) {
+      const area = w * h;
+      const targetCells = clamp(Math.round(area / divisor), minCells, maxCells);
+      const rows = Math.max(6, Math.round(Math.sqrt(targetCells * 3 / 4)));
+      const cols = Math.max(8, Math.round(rows * 4 / 3));
+      return { cols, rows, cellW: w / cols, cellH: h / rows };
+    }
+    function cellPolygon(x,y,w,h) { return [{x,y},{x:x+w,y},{x:x+w,y:y+h},{x,y:y+h}]; }
+    function centroidOf(poly) { let sx=0,sy=0; for(const p of poly){sx+=p.x;sy+=p.y;} return {x:sx/poly.length,y:sy/poly.length}; }
+
+    function setupCanvas(canvas) {
+      const cssW = canvas.clientWidth;
+      const cssH = canvas.clientHeight || cssW * 3 / 4;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx, w: cssW, h: cssH };
+    }
+
+    // ── HERO CANVAS (ambient AI animation) ──
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      let ctx, W, H;
+      let gradCanvas, gctx, blurCanvas, bctx;
+      let shapes, cycleStart, lastT = 0;
+      const ASSEMBLE = 4000, HOLD = 1200, BREAK = 1900;
+      const CYCLE = ASSEMBLE + HOLD + BREAK;
+
+      function init() {
+        const r = setupCanvas(canvas);
+        ctx = r.ctx; W = r.w; H = r.h;
+        gradCanvas = document.createElement('canvas');
+        gradCanvas.width = Math.floor(W); gradCanvas.height = Math.floor(H);
+        gctx = gradCanvas.getContext('2d');
+        blurCanvas = document.createElement('canvas');
+        blurCanvas.width = gradCanvas.width; blurCanvas.height = gradCanvas.height;
+        bctx = blurCanvas.getContext('2d');
+        reshuffle();
+      }
+
+      function makePieces() {
+        const grid = gridForSize(W, H, 48, 144, 14000);
+        const occ = Array.from({length:grid.rows},()=>Array(grid.cols).fill(false));
+        const pieces = []; let id = 0;
+        for(let r=0;r<grid.rows;r++) for(let c=0;c<grid.cols;c++) {
+          if(occ[r][c]) continue;
+          const cx=c*grid.cellW, cy=r*grid.cellH;
+          const canR=c+1<grid.cols&&!occ[r][c+1], canD=r+1<grid.rows&&!occ[r+1][c];
+          const roll=Math.random();
+          if(roll<0.28&&canR){ add([{x:cx,y:cy},{x:cx+grid.cellW*2,y:cy},{x:cx+grid.cellW*2,y:cy+grid.cellH},{x:cx,y:cy+grid.cellH}]); occ[r][c]=occ[r][c+1]=true; }
+          else if(roll<0.46&&canD){ add([{x:cx,y:cy},{x:cx+grid.cellW,y:cy},{x:cx+grid.cellW,y:cy+grid.cellH*2},{x:cx,y:cy+grid.cellH*2}]); occ[r][c]=occ[r+1][c]=true; }
+          else if(roll<0.72){ const cl=cellPolygon(cx,cy,grid.cellW,grid.cellH); if(Math.random()<0.5){add([cl[0],cl[1],cl[3]]);add([cl[1],cl[2],cl[3]]);}else{add([cl[0],cl[2],cl[3]]);add([cl[0],cl[1],cl[2]]);} occ[r][c]=true; }
+          else { add(cellPolygon(cx,cy,grid.cellW,grid.cellH)); occ[r][c]=true; }
+        }
+        function add(poly) {
+          const center=centroidOf(poly);
+          const sX=Math.random()*W, sY=Math.random()*H;
+          const oR=Math.max(W,H)*(0.6+Math.random()*0.6);
+          const th=Math.random()*Math.PI*2;
+          const sR=(Math.random()*2-1)*Math.PI;
+          pieces.push({id:id++,poly,center,color:COLORS[Math.floor(Math.random()*COLORS.length)],start:{x:sX,y:sY,rot:sR},broken:{x:center.x+Math.cos(th)*oR,y:center.y+Math.sin(th)*oR,rot:sR*1.2}});
+        }
+        return pieces;
+      }
+
+      function rebuildGrad() {
+        const w=gradCanvas.width, h=gradCanvas.height;
+        gctx.clearRect(0,0,w,h);
+        gctx.globalCompositeOperation='lighter';
+        for(const p of shapes) {
+          let minx=Infinity,miny=Infinity,maxx=-Infinity,maxy=-Infinity;
+          for(const v of p.poly){if(v.x<minx)minx=v.x;if(v.y<miny)miny=v.y;if(v.x>maxx)maxx=v.x;if(v.y>maxy)maxy=v.y;}
+          const s=Math.hypot(maxx-minx,maxy-miny), r0=s*0.28, r1=s*0.75;
+          const grad=gctx.createRadialGradient(p.center.x,p.center.y,Math.max(1,r0),p.center.x,p.center.y,Math.max(r1,r0+1));
+          grad.addColorStop(0,p.color); grad.addColorStop(1,'rgba(0,0,0,0)');
+          gctx.fillStyle=grad; gctx.beginPath(); gctx.arc(p.center.x,p.center.y,r1,0,Math.PI*2); gctx.fill();
+        }
+        bctx.clearRect(0,0,blurCanvas.width,blurCanvas.height);
+        bctx.filter='blur(24px)'; bctx.drawImage(gradCanvas,0,0); bctx.filter='none';
+        gctx.globalCompositeOperation='source-over';
+        gctx.clearRect(0,0,w,h); gctx.drawImage(blurCanvas,0,0);
+      }
+
+      function reshuffle(now=performance.now()) { shapes=makePieces(); cycleStart=now; rebuildGrad(); }
+
+      function frame(now) {
+        requestAnimationFrame(frame);
+        if (!canvasVisible.get(canvas)) return;
+        const t=(now-cycleStart)%CYCLE;
+        let alpha=0;
+        if(t<ASSEMBLE) alpha=easeOutCubic(t/ASSEMBLE);
+        else if(t<ASSEMBLE+HOLD) alpha=1;
+        else { const td=(t-(ASSEMBLE+HOLD))/BREAK; alpha=1-easeInOutCubic(td); }
+        const inBreak=t>=ASSEMBLE+HOLD;
+        const posAlpha=inBreak?1:alpha;
+        const raw=clamp((alpha-0.6)/0.5,0,1);
+        let blend=raw*raw*(3-2*raw);
+        if(inBreak) blend=1;
+
+        ctx.clearRect(0,0,W,H);
+        ctx.save(); ctx.globalAlpha=1-blend*0.85;
+        const sorted=[...shapes].sort((a,b)=>a.center.y-b.center.y);
+        for(const item of sorted) {
+          const {poly,start,broken,center,color}=item;
+          const ix1=lerp(start.x,center.x,posAlpha), iy1=lerp(start.y,center.y,posAlpha);
+          const ix=lerp(ix1,broken.x,1-posAlpha), iy=lerp(iy1,broken.y,1-posAlpha);
+          const rot1=lerp(start.rot,0,easeOutCubic(posAlpha)), rot=lerp(rot1,broken.rot,1-posAlpha);
+          ctx.save(); ctx.translate(ix,iy); ctx.rotate(rot);
+          ctx.beginPath(); for(let i=0;i<poly.length;i++){const px=poly[i].x-center.x,py=poly[i].y-center.y;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);} ctx.closePath();
+          ctx.fillStyle=color; ctx.fill(); ctx.restore();
+        }
+        ctx.restore();
+        if(blend>0) { ctx.save(); ctx.globalAlpha=blend; const glow=1+0.02*Math.sin((now/600)%(Math.PI*2)); ctx.filter=`brightness(${glow})`; ctx.drawImage(gradCanvas,0,0,W,H); ctx.filter='none'; ctx.restore(); }
+        let fadeOut=0;
+        if(inBreak){const td=(t-(ASSEMBLE+HOLD))/BREAK;fadeOut=easeInOutCubic(clamp(td,0,1));}
+        if(fadeOut>0){ctx.save();ctx.globalAlpha=fadeOut;ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);ctx.restore();}
+        if(t+16<lastT) reshuffle(now);
+        lastT=t;
+      }
+      init();
+      trackCanvas(canvas);
+      requestAnimationFrame(frame);
+      window.addEventListener('resize', () => { init(); });
+    })();
+
+
+    // ── LOOP DIAGRAM: Broken Ring with Head & Tail ──
+    // A thick arc (~340°) with a gap. The head (leading edge) is bright and glows,
+    // the tail (trailing edge) fades out. The head position illuminates each label
+    // as it passes through the cardinal points: top=Frame, right=Collaborate,
+    // bottom=Picture, left=Progress.
+    (function() {
+      const canvas = document.getElementById('loop-canvas');
+      if (!canvas) return;
+      let ctx, W, H, cx, cy, outerR, innerR, midR, thickness;
+
+      // Phase colors: cyan, green, yellow, purple
+      const PC = [
+        [150, 245, 255],  // cyan   – Frame (top)
+        [190, 255, 165],  // green  – Collaborate (right)
+        [255, 240, 165],  // yellow – Picture (bottom)
+        [200, 170, 255],  // purple – Progress (left)
+      ];
+
+      const ROTATION_PERIOD = 14000; // ms per full revolution
+      const GAP_ANGLE = 0.35;        // radians (~20°) gap size
+      const ARC_LENGTH = Math.PI * 2 - GAP_ANGLE; // visible arc
+      const TAIL_FADE = 0.18;        // fraction of arc that fades at tail
+      const HEAD_GLOW_SIZE = 0.06;   // fraction of arc for head glow
+
+      const phaseEls = document.querySelectorAll('.loop-phase');
+      let lastPhase = -1;
+
+      // Timeline bar elements
+      const timelineFill = document.querySelector('.timeline-fill');
+      const timelineNodes = document.querySelectorAll('.timeline-node');
+      const NODE_COUNT = timelineNodes.length;
+      let lastLitNode = -1;
+
+      // Corner angles (canvas coords): top-left, top-right, bottom-right, bottom-left
+      const CARDINAL = [-Math.PI*3/4, -Math.PI/4, Math.PI/4, Math.PI*3/4];
+
+      function init() {
+        const cssW = canvas.clientWidth;
+        const cssH = cssW;
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.floor(cssW * dpr);
+        canvas.height = Math.floor(cssH * dpr);
+        ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        W = cssW; H = cssH;
+        cx = W / 2; cy = H / 2;
+
+        const ringSize = Math.min(W, H) * 0.42;
+        outerR = ringSize;
+        innerR = ringSize * 0.60;
+        midR = (outerR + innerR) / 2;
+        thickness = outerR - innerR;
+      }
+
+      // Get color at a normalized position (0..1) around the 4-color wheel
+      function wheelColor(t) {
+        const n = PC.length;
+        const scaled = t * n;
+        const i = Math.floor(scaled) % n;
+        const j = (i + 1) % n;
+        const f = scaled - Math.floor(scaled);
+        const s = f * f * (3 - 2 * f); // smoothstep
+        return [
+          PC[i][0] + (PC[j][0] - PC[i][0]) * s,
+          PC[i][1] + (PC[j][1] - PC[i][1]) * s,
+          PC[i][2] + (PC[j][2] - PC[i][2]) * s,
+        ];
+      }
+
+      function setActivePhase(idx) {
+        if (idx === lastPhase) return;
+        lastPhase = idx;
+        phaseEls.forEach((el, i) => el.classList.toggle('active', i === idx));
+      }
+
+      // Normalize angle to [0, 2PI)
+      function normAngle(a) { return ((a % (Math.PI*2)) + Math.PI*2) % (Math.PI*2); }
+
+      // Offscreen canvas for compositing (avoids alpha stacking artifacts)
+      let offCanvas, offCtx;
+
+      function initOffscreen() {
+        offCanvas = document.createElement('canvas');
+        offCanvas.width = canvas.width;
+        offCanvas.height = canvas.height;
+        offCtx = offCanvas.getContext('2d');
+      }
+
+      function frame(now) {
+        requestAnimationFrame(frame);
+        if (!canvasVisible.get(canvas)) return;
+
+        // Head angle rotates clockwise continuously. Starts at top (-PI/2).
+        const progress = (now % ROTATION_PERIOD) / ROTATION_PERIOD;
+        const headAngle = -Math.PI/2 + progress * Math.PI * 2;
+        // Tail is behind the head by ARC_LENGTH
+        const tailAngle = headAngle - ARC_LENGTH;
+
+        // Active phase = whichever cardinal point the head most recently passed
+        const headNorm = normAngle(headAngle);
+        // Check each cardinal: which one did the head most recently cross?
+        let bestPhase = 0, bestDist = Infinity;
+        for (let i = 0; i < 4; i++) {
+          const cNorm = normAngle(CARDINAL[i]);
+          // Angular distance the head has traveled past this cardinal (CW)
+          const dist = normAngle(headNorm - cNorm);
+          if (dist < bestDist) { bestDist = dist; bestPhase = i; }
+        }
+        setActivePhase(bestPhase);
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Ensure offscreen canvas matches size
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        if (!offCanvas || offCanvas.width !== canvas.width) initOffscreen();
+        offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        offCtx.clearRect(0, 0, W, H);
+
+        // Draw the arc at full opacity onto the offscreen canvas
+        const segments = 200;
+        const segArc = ARC_LENGTH / segments;
+
+        for (let i = 0; i < segments; i++) {
+          const angle = tailAngle + (i / segments) * ARC_LENGTH;
+
+          // Color: map the absolute angle to the 4-color wheel
+          const colorT = normAngle(angle + Math.PI/2) / (Math.PI * 2);
+          const [r, g, b] = wheelColor(colorT);
+
+          // Draw thick arc segment at full opacity
+          const a0 = angle - segArc * 0.15;
+          const a1 = angle + segArc * 1.15; // slight overlap to avoid gaps
+
+          offCtx.beginPath();
+          offCtx.arc(cx, cy, outerR, a0, a1);
+          offCtx.arc(cx, cy, innerR, a1, a0, true);
+          offCtx.closePath();
+          offCtx.fillStyle = `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;
+          offCtx.fill();
+        }
+
+        // Apply tail fade as a single erase pass using destination-out
+        // This avoids alpha stacking from overlapping segments
+        offCtx.save();
+        offCtx.globalCompositeOperation = 'destination-out';
+        const fadeSegments = Math.ceil(segments * TAIL_FADE);
+        const fadeArc = ARC_LENGTH * TAIL_FADE;
+        for (let i = 0; i < fadeSegments; i++) {
+          const t = i / fadeSegments; // 0 = tail tip, 1 = end of fade zone
+          const angle = tailAngle + t * fadeArc;
+          const fadeAlpha = 1 - t * t; // inverse quadratic: full erase at tail, none at end
+
+          const a0 = angle - segArc * 0.5;
+          const a1 = angle + segArc * 1.5;
+
+          offCtx.beginPath();
+          offCtx.arc(cx, cy, outerR + 1, a0, a1);
+          offCtx.arc(cx, cy, innerR - 1, a1, a0, true);
+          offCtx.closePath();
+          offCtx.fillStyle = `rgba(0,0,0,${fadeAlpha})`;
+          offCtx.fill();
+        }
+        offCtx.restore();
+
+        // Composite offscreen result onto main canvas
+        ctx.drawImage(offCanvas, 0, 0);
+
+        // Head arrowhead — stout chevron pointing in the direction of travel
+        const headColorT = normAngle(headAngle + Math.PI/2) / (Math.PI * 2);
+        const [hr, hg, hb] = wheelColor(headColorT);
+
+        // Arrow geometry: tangent direction at head, perpendicular = radial
+        const tangentAngle = headAngle + Math.PI / 2; // tangent (CW travel direction)
+        const arrowLen = thickness * 0.7;   // how far the tip extends past the arc
+        const arrowWidth = thickness * 0.65; // half-width of the base
+
+        // Tip: on the mid-radius, ahead of the arc end
+        const tipX = cx + Math.cos(headAngle) * midR + Math.cos(tangentAngle) * arrowLen;
+        const tipY = cy + Math.sin(headAngle) * midR + Math.sin(tangentAngle) * arrowLen;
+
+        // Base corners: outer and inner edges of the ring at the head angle
+        const baseOutX = cx + Math.cos(headAngle) * (midR + arrowWidth);
+        const baseOutY = cy + Math.sin(headAngle) * (midR + arrowWidth);
+        const baseInX = cx + Math.cos(headAngle) * (midR - arrowWidth);
+        const baseInY = cy + Math.sin(headAngle) * (midR - arrowWidth);
+
+        // Draw filled arrow
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(tipX, tipY);
+        ctx.lineTo(baseOutX, baseOutY);
+        ctx.lineTo(baseInX, baseInY);
+        ctx.closePath();
+        ctx.fillStyle = `rgb(${Math.round(hr)},${Math.round(hg)},${Math.round(hb)})`;
+        ctx.fill();
+        ctx.restore();
+
+        // Soft glow behind the arrowhead
+        const hx = cx + Math.cos(headAngle) * midR;
+        const hy = cy + Math.sin(headAngle) * midR;
+        const glowSize = thickness * 1.6;
+        const headGlow = ctx.createRadialGradient(hx, hy, thickness * 0.1, hx, hy, glowSize);
+        headGlow.addColorStop(0, `rgba(${Math.round(hr)},${Math.round(hg)},${Math.round(hb)},0.35)`);
+        headGlow.addColorStop(0.5, `rgba(${Math.round(hr)},${Math.round(hg)},${Math.round(hb)},0.1)`);
+        headGlow.addColorStop(1, `rgba(${Math.round(hr)},${Math.round(hg)},${Math.round(hb)},0)`);
+        ctx.fillStyle = headGlow;
+        ctx.beginPath();
+        ctx.arc(hx, hy, glowSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Outer edge highlight
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, tailAngle, headAngle);
+        ctx.arc(cx, cy, outerR - 1, headAngle, tailAngle, true);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fill();
+
+        // Inner edge shadow
+        ctx.beginPath();
+        ctx.arc(cx, cy, innerR + 1, tailAngle, headAngle);
+        ctx.arc(cx, cy, innerR, headAngle, tailAngle, true);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(0,0,0,0.06)';
+        ctx.fill();
+        ctx.restore();
+
+        // Ambient glow behind entire ring
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        const ambR = outerR * 1.12;
+        const amb = ctx.createRadialGradient(cx, cy, outerR * 0.85, cx, cy, ambR);
+        amb.addColorStop(0, 'rgba(180,180,220,0.08)');
+        amb.addColorStop(1, 'rgba(180,180,220,0)');
+        ctx.fillStyle = amb;
+        ctx.beginPath();
+        ctx.arc(cx, cy, ambR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // ── Timeline bar update ──
+        if (timelineFill) {
+          timelineFill.style.width = (progress * 100) + '%';
+        }
+        // Spread 6 nodes evenly across 0%–90% so all are reachable
+        let newLit = -1;
+        for (let i = 0; i < NODE_COUNT; i++) {
+          const nodePos = (i / (NODE_COUNT - 1)) * 0.9;
+          if (progress >= nodePos) newLit = i;
+        }
+        if (newLit !== lastLitNode) {
+          lastLitNode = newLit;
+          timelineNodes.forEach((n, i) => n.classList.toggle('lit', i <= newLit));
+        }
+      }
+
+      init();
+      trackCanvas(canvas);
+      requestAnimationFrame(frame);
+      window.addEventListener('resize', () => { init(); });
+    })();
+
+
+    // ── ERA: WRITING ──
+    (function() {
+      const canvas = document.getElementById('era-writing');
+      let ctx, W, H, shapes, cycleStart, lastT = 0;
+      const ASSEMBLE=3100, HOLD=2500, BREAK=1900, CYCLE=ASSEMBLE+HOLD+BREAK;
+
+      function init() {
+        const r = setupCanvas(canvas); ctx=r.ctx; W=r.w; H=r.h;
+        reshuffle();
+      }
+      function makePieces() {
+        const grid=gridForSize(W,H,64,196,12000);
+        const pieces=[]; let id=0;
+        for(let r=0;r<grid.rows;r++) for(let c=0;c<grid.cols;c++){
+          const poly=cellPolygon(c*grid.cellW,r*grid.cellH,grid.cellW,grid.cellH);
+          const center=centroidOf(poly);
+          const color=COLORS[(r+c)%COLORS.length];
+          const leftM=Math.max(0.08*W,grid.cellW*1.5);
+          const sX=-leftM-Math.random()*W*0.2, sY=center.y+(Math.random()-0.5)*grid.cellH*0.6;
+          const sR=(Math.random()*2-1)*0.25;
+          const rightM=Math.max(0.10*W,grid.cellW*2);
+          const bX=W+rightM+Math.random()*W*0.2, bY=center.y+(Math.random()-0.5)*grid.cellH*0.8;
+          pieces.push({id:id++,poly,center,color,row:r,col:c,grid,start:{x:sX,y:sY,rot:sR},broken:{x:bX,y:bY,rot:sR*1.2}});
+        }
+        return pieces;
+      }
+      function reshuffle(now=performance.now()){shapes=makePieces();cycleStart=now;}
+
+      function roundRect(x,y,w,h,r){const rr=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+rr,y);ctx.lineTo(x+w-rr,y);ctx.quadraticCurveTo(x+w,y,x+w,y+rr);ctx.lineTo(x+w,y+h-rr);ctx.quadraticCurveTo(x+w,y+h,x+w-rr,y+h);ctx.lineTo(x+rr,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-rr);ctx.lineTo(x,y+rr);ctx.quadraticCurveTo(x,y,x+rr,y);ctx.closePath();ctx.fill();}
+
+      function frame(now){
+        requestAnimationFrame(frame);
+        if (!canvasVisible.get(canvas)) return;
+        const t=(now-cycleStart)%CYCLE;
+        // backdrop
+        ctx.clearRect(0,0,W,H);
+        const grid=gridForSize(W,H,64,196,12000);
+        const margin=Math.max(0.08*W,grid.cellW*1.5);
+        ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+        for(let r=0;r<=grid.rows;r++){const y=r*grid.cellH+0.5;ctx.beginPath();ctx.moveTo(margin,y);ctx.lineTo(W-margin*0.35,y);ctx.stroke();}
+        ctx.strokeStyle='rgba(255,0,0,0.12)';ctx.beginPath();ctx.moveTo(margin,0);ctx.lineTo(margin,H);ctx.stroke();
+
+        let alpha=0;
+        if(t<ASSEMBLE)alpha=easeOutCubic(t/ASSEMBLE);else if(t<ASSEMBLE+HOLD)alpha=1;else{const td=(t-(ASSEMBLE+HOLD))/BREAK;alpha=1-easeInOutCubic(td);}
+        const sorted=[...shapes].sort((a,b)=>(a.col-b.col)||(a.row-b.row));
+        for(const item of sorted){
+          const {poly,color,start,broken,center,col,row}=item;
+          const stagger=0.012;
+          const la=clamp((alpha-col*stagger)*1.2,0,1);
+          const ix1=lerp(start.x,center.x,la),iy1=lerp(start.y,center.y,la);
+          const ix=lerp(ix1,broken.x,1-la),iy=lerp(iy1,broken.y,1-la);
+          const rot=lerp(start.rot,0,easeOutCubic(la));
+          const pulse=1+Math.sin((now-cycleStart)/CYCLE*Math.PI*2+(item.id%7))*0.008;
+          const tileW=poly[1].x-poly[0].x, tileH=poly[3].y-poly[0].y;
+          ctx.save();ctx.translate(ix,iy);ctx.rotate(rot);ctx.scale(pulse,pulse);
+          ctx.save();ctx.beginPath();for(let i=0;i<poly.length;i++){const px=poly[i].x-center.x,py=poly[i].y-center.y;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.closePath();ctx.clip();
+          const inset=Math.min(tileW,tileH)*0.06;const sW=tileW-2*inset,sH=tileH-2*inset,sX=-tileW/2+inset,sY=-tileH/2+inset,rrad=Math.min(sW,sH)*0.18;
+          ctx.fillStyle=color;roundRect(sX,sY,sW,sH,rrad);
+          if(((row*7+col)%5)===0){ctx.beginPath();const s=Math.min(tileW,tileH)*0.28;ctx.moveTo(-tileW*0.45+inset*0.6,tileH*0.12);ctx.lineTo(-tileW*0.08,tileH*0.12);ctx.lineTo(-tileW*0.45+inset*0.6,tileH*0.12+s);ctx.closePath();ctx.fill();}
+          ctx.restore();ctx.restore();
+        }
+        if(t+16<lastT)reshuffle(now);lastT=t;
+      }
+      init(); trackCanvas(canvas); requestAnimationFrame(frame);
+      window.addEventListener('resize',()=>init());
+    })();
+
+
+    // ── ERA: SPEECH ──
+    (function() {
+      const canvas = document.getElementById('era-speech');
+      let ctx, W, H, shapes, cycleStart, lastT = 0;
+      const ASSEMBLE=3600, HOLD=2500, BREAK=1900, CYCLE=ASSEMBLE+HOLD+BREAK;
+
+      function init() { const r=setupCanvas(canvas);ctx=r.ctx;W=r.w;H=r.h;reshuffle(); }
+      function makePieces(){
+        const grid=gridForSize(W,H,48,144,14000);
+        const pieces=[];let id=0;
+        for(let r=0;r<grid.rows;r++)for(let c=0;c<grid.cols;c++){
+          const poly=cellPolygon(c*grid.cellW,r*grid.cellH,grid.cellW,grid.cellH);
+          const center=centroidOf(poly);
+          const color=COLORS[Math.floor(Math.random()*COLORS.length)];
+          const sX=Math.random()*W,sY=Math.random()*H,sR=(Math.random()*2-1)*Math.PI;
+          const oR=Math.max(W,H)*(0.6+Math.random()*0.6),th=Math.random()*Math.PI*2;
+          pieces.push({id:id++,poly,center,color,start:{x:sX,y:sY,rot:sR},broken:{x:center.x+Math.cos(th)*oR,y:center.y+Math.sin(th)*oR,rot:sR*1.2}});
+        }
+        return pieces;
+      }
+      function reshuffle(now=performance.now()){shapes=makePieces();cycleStart=now;}
+
+      function frame(now){
+        requestAnimationFrame(frame);
+        if (!canvasVisible.get(canvas)) return;
+        const t=(now-cycleStart)%CYCLE;
+        ctx.clearRect(0,0,W,H);
+        const cxP=W*0.25,cyP=H*0.55;
+        ctx.strokeStyle='rgba(0,0,0,0.05)';const offset=(now/20)%80;
+        for(let rr=40;rr<Math.max(W,H);rr+=80){ctx.beginPath();ctx.arc(cxP,cyP,rr+offset,0,Math.PI*2);ctx.stroke();}
+
+        let alpha=0;
+        if(t<ASSEMBLE)alpha=easeOutCubic(t/ASSEMBLE);else if(t<ASSEMBLE+HOLD)alpha=1;else{const td=(t-(ASSEMBLE+HOLD))/BREAK;alpha=1-easeInOutCubic(td);}
+        const sorted=[...shapes].sort((a,b)=>a.center.y-b.center.y);
+        for(const item of sorted){
+          const {poly,color,start,broken,center}=item;
+          const ox=W*0.25,oy=H*0.55;
+          const vx=center.x-ox,vy=center.y-oy;
+          const baseAngle=Math.atan2(vy,vx),baseR=Math.hypot(vx,vy);
+          const spiralAngle=baseAngle+(1-alpha)*1.25*2*Math.PI;
+          const spiralRadius=baseR*(0.35+0.65*alpha);
+          const sx=ox+Math.cos(spiralAngle)*spiralRadius,sy=oy+Math.sin(spiralAngle)*spiralRadius;
+          const ix1=lerp(start.x,sx,alpha),iy1=lerp(start.y,sy,alpha);
+          const ix=lerp(ix1,broken.x,1-alpha),iy=lerp(iy1,broken.y,1-alpha);
+          const targetRot=baseAngle*0.15;
+          const rot1=lerp(start.rot,targetRot,easeOutCubic(alpha)),rot=lerp(rot1,broken.rot,1-alpha);
+          const pulse=1+Math.sin((now-cycleStart)/CYCLE*Math.PI*2+(item.id%10))*0.012;
+          const tileW=poly[1].x-poly[0].x,tileH=poly[3].y-poly[0].y;
+          const tileS=Math.min(tileW,tileH),rad=tileS*(0.38+0.10*alpha);
+          ctx.save();ctx.translate(ix,iy);ctx.rotate(rot);ctx.scale(pulse,pulse);
+          ctx.save();ctx.beginPath();for(let i=0;i<poly.length;i++){const px=poly[i].x-center.x,py=poly[i].y-center.y;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.closePath();ctx.clip();
+          ctx.fillStyle=color;ctx.beginPath();ctx.arc(0,0,rad,0,Math.PI*2);ctx.fill();
+          const tailLen=rad*(0.55-0.25*alpha),tailAng=Math.atan2(oy-center.y,ox-center.x),tailW2=rad*(0.30-0.12*alpha);
+          ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(tailAng-0.35)*tailW2,Math.sin(tailAng-0.35)*tailW2);ctx.lineTo(Math.cos(tailAng)*tailLen,Math.sin(tailAng)*tailLen);ctx.lineTo(Math.cos(tailAng+0.35)*tailW2,Math.sin(tailAng+0.35)*tailW2);ctx.closePath();ctx.fill();
+          ctx.restore();ctx.restore();
+        }
+        if(t+16<lastT)reshuffle(now);lastT=t;
+      }
+      init();trackCanvas(canvas);requestAnimationFrame(frame);
+      window.addEventListener('resize',()=>init());
+    })();
+
+
+    // ── ERA: INTERNET ──
+    (function() {
+      const canvas=document.getElementById('era-internet');
+      let ctx,W,H,shapes,cycleStart,lastT=0;
+      const ASSEMBLE=4000,HOLD=2500,BREAK=1900,CYCLE=ASSEMBLE+HOLD+BREAK;
+      const GAP=0.06;
+
+      function init(){const r=setupCanvas(canvas);ctx=r.ctx;W=r.w;H=r.h;reshuffle();}
+      function makePieces(){
+        const grid=gridForSize(W,H,48,144,14000);
+        const occ=Array.from({length:grid.rows},()=>Array(grid.cols).fill(false));
+        const pieces=[];let id=0;
+        for(let r=0;r<grid.rows;r++)for(let c=0;c<grid.cols;c++){
+          if(occ[r][c])continue;
+          const cx=c*grid.cellW,cy=r*grid.cellH;
+          const canR=c+1<grid.cols&&!occ[r][c+1],canD=r+1<grid.rows&&!occ[r+1][c];
+          const roll=Math.random();
+          if(roll<0.28&&canR){add([{x:cx,y:cy},{x:cx+grid.cellW*2,y:cy},{x:cx+grid.cellW*2,y:cy+grid.cellH},{x:cx,y:cy+grid.cellH}]);occ[r][c]=occ[r][c+1]=true;}
+          else if(roll<0.46&&canD){add([{x:cx,y:cy},{x:cx+grid.cellW,y:cy},{x:cx+grid.cellW,y:cy+grid.cellH*2},{x:cx,y:cy+grid.cellH*2}]);occ[r][c]=occ[r+1][c]=true;}
+          else if(roll<0.72){const cl=cellPolygon(cx,cy,grid.cellW,grid.cellH);if(Math.random()<0.5){add([cl[0],cl[1],cl[3]]);add([cl[1],cl[2],cl[3]]);}else{add([cl[0],cl[2],cl[3]]);add([cl[0],cl[1],cl[2]]);}occ[r][c]=true;}
+          else{add(cellPolygon(cx,cy,grid.cellW,grid.cellH));occ[r][c]=true;}
+        }
+        function add(poly){
+          const center=centroidOf(poly);const sX=Math.random()*W,sY=Math.random()*H;
+          const oR=Math.max(W,H)*(0.6+Math.random()*0.6),th=Math.random()*Math.PI*2,sR=(Math.random()*2-1)*Math.PI;
+          pieces.push({id:id++,poly,center,color:COLORS[Math.floor(Math.random()*COLORS.length)],start:{x:sX,y:sY,rot:sR},broken:{x:center.x+Math.cos(th)*oR,y:center.y+Math.sin(th)*oR,rot:sR*1.2}});
+        }
+        return pieces;
+      }
+      function reshuffle(now=performance.now()){shapes=makePieces();cycleStart=now;}
+
+      function frame(now){
+        requestAnimationFrame(frame);
+        if (!canvasVisible.get(canvas)) return;
+        const t=(now-cycleStart)%CYCLE;
+        ctx.clearRect(0,0,W,H);
+        ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+        const cxP=W*0.5,cyP=H*0.5;const rings=8;const step=Math.min(W,H)/(rings+2);const offset=(now/24)%step;
+        for(let i=1;i<=rings;i++){ctx.beginPath();ctx.arc(cxP,cyP,i*step+offset,0,Math.PI*2);ctx.stroke();}
+
+        let alpha=0;
+        if(t<ASSEMBLE)alpha=easeOutCubic(t/ASSEMBLE);else if(t<ASSEMBLE+HOLD)alpha=1;else{const td=(t-(ASSEMBLE+HOLD))/BREAK;alpha=1-easeInOutCubic(td);}
+        const sorted=[...shapes].sort((a,b)=>a.center.y-b.center.y);
+        for(const item of sorted){
+          const {poly,start,broken,center,color}=item;
+          const ix1=lerp(start.x,center.x,alpha),iy1=lerp(start.y,center.y,alpha);
+          const ix=lerp(ix1,broken.x,1-alpha),iy=lerp(iy1,broken.y,1-alpha);
+          const rot1=lerp(start.rot,0,easeOutCubic(alpha)),rot=lerp(rot1,broken.rot,1-alpha);
+          const pulse=1+Math.sin((now-cycleStart)/CYCLE*Math.PI*2+(item.id%10))*0.015;
+          const scale=lerp(1,1-GAP,alpha)*pulse;
+          ctx.save();ctx.translate(ix,iy);ctx.rotate(rot);ctx.scale(scale,scale);
+          ctx.fillStyle=color;ctx.beginPath();for(let i=0;i<poly.length;i++){const px=poly[i].x-center.x,py=poly[i].y-center.y;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.closePath();ctx.fill();
+          ctx.restore();
+        }
+        if(t+16<lastT)reshuffle(now);lastT=t;
+      }
+      init();trackCanvas(canvas);requestAnimationFrame(frame);
+      window.addEventListener('resize',()=>init());
+    })();
+
+
+    // ── ERA: AI ──
+    // No tiles. Colors bleed in from blank canvas like watercolor,
+    // each cycle with a different arrangement of color blobs.
+    (function() {
+      const canvas=document.getElementById('era-ai');
+      let ctx,W,H,blobs,cycleStart,lastT=0;
+      let bufCanvas,bufCtx;
+      const ASSEMBLE=4500,HOLD=2500,BREAK=2000,CYCLE=ASSEMBLE+HOLD+BREAK;
+      const BLOB_COUNT=20;
+
+      function init(){
+        const r=setupCanvas(canvas);ctx=r.ctx;W=r.w;H=r.h;
+        bufCanvas=document.createElement('canvas');
+        bufCanvas.width=Math.floor(W);bufCanvas.height=Math.floor(H);
+        bufCtx=bufCanvas.getContext('2d');
+        reshuffle();
+      }
+
+      function makeBlobs(){
+        const result=[];
+        // Shuffle colors so each cycle has a different arrangement
+        const shuffled=[...COLORS].sort(()=>Math.random()-0.5);
+        for(let i=0;i<BLOB_COUNT;i++){
+          const color=shuffled[i%shuffled.length];
+          // Fully random position across the canvas
+          const x=Math.random()*W;
+          const y=Math.random()*H;
+          // Larger blob sizes for more canvas coverage
+          const maxR=Math.min(W,H)*(0.25+Math.random()*0.3);
+          // Wider stagger so blobs bleed in at noticeably different times
+          const delay=Math.random()*0.55;
+          // Slow drift direction
+          const driftAngle=Math.random()*Math.PI*2;
+          const driftSpeed=Math.min(W,H)*(0.01+Math.random()*0.02);
+          // Pulse phase offset
+          const pulseOffset=Math.random()*Math.PI*2;
+          result.push({x,y,maxR,color,delay,driftAngle,driftSpeed,pulseOffset});
+        }
+        return result;
+      }
+
+      function reshuffle(now=performance.now()){blobs=makeBlobs();cycleStart=now;}
+
+      function frame(now){
+        requestAnimationFrame(frame);
+        if(!canvasVisible.get(canvas))return;
+        const t=(now-cycleStart)%CYCLE;
+
+        // Overall alpha: fade in during ASSEMBLE, full during HOLD, fade out during BREAK
+        let alpha=0;
+        if(t<ASSEMBLE)alpha=easeOutCubic(t/ASSEMBLE);
+        else if(t<ASSEMBLE+HOLD)alpha=1;
+        else{const td=(t-(ASSEMBLE+HOLD))/BREAK;alpha=1-easeInOutCubic(td);}
+
+        // Draw blobs onto buffer — screen blend keeps colors vivid without washing to white
+        bufCtx.clearRect(0,0,W,H);
+        bufCtx.globalCompositeOperation='screen';
+
+        const elapsed=t/ASSEMBLE; // how far into the assemble phase (can exceed 1)
+
+        for(const blob of blobs){
+          // Each blob has its own staggered entry
+          const blobProgress=clamp((elapsed-blob.delay)/(1-blob.delay),0,1);
+          const blobAlpha=easeOutCubic(blobProgress);
+          if(blobAlpha<=0)continue;
+
+          // Current radius grows as it bleeds in
+          const currentR=blob.maxR*(0.3+0.7*blobAlpha);
+
+          // Gentle drift over time
+          const totalT=now/1000;
+          const dx=Math.cos(blob.driftAngle)*blob.driftSpeed*Math.sin(totalT*0.3+blob.pulseOffset);
+          const dy=Math.sin(blob.driftAngle)*blob.driftSpeed*Math.sin(totalT*0.25+blob.pulseOffset+1);
+
+          // Subtle pulse
+          const pulse=1+0.08*Math.sin(totalT*0.8+blob.pulseOffset);
+          const r=currentR*pulse;
+
+          const cx=blob.x+dx;
+          const cy=blob.y+dy;
+
+          // Radial gradient: color center fading to transparent
+          const grad=bufCtx.createRadialGradient(cx,cy,r*0.05,cx,cy,r);
+          // Parse hex color for rgba
+          const hex=blob.color;
+          const cr=parseInt(hex.slice(1,3),16);
+          const cg=parseInt(hex.slice(3,5),16);
+          const cb=parseInt(hex.slice(5,7),16);
+          grad.addColorStop(0,`rgba(${cr},${cg},${cb},${0.7*blobAlpha})`);
+          grad.addColorStop(0.35,`rgba(${cr},${cg},${cb},${0.45*blobAlpha})`);
+          grad.addColorStop(0.7,`rgba(${cr},${cg},${cb},${0.12*blobAlpha})`);
+          grad.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+
+          bufCtx.fillStyle=grad;
+          bufCtx.beginPath();
+          bufCtx.arc(cx,cy,r,0,Math.PI*2);
+          bufCtx.fill();
+        }
+        bufCtx.globalCompositeOperation='source-over';
+
+        // Apply blur for the soft watercolor look
+        ctx.clearRect(0,0,W,H);
+        ctx.save();
+        ctx.globalAlpha=alpha;
+        ctx.filter='blur(30px)';
+        ctx.drawImage(bufCanvas,0,0,W,H);
+        ctx.filter='none';
+
+        // Layer a second pass with less blur for some definition in the centers
+        ctx.globalAlpha=alpha*0.35;
+        ctx.filter='blur(10px)';
+        ctx.drawImage(bufCanvas,0,0,W,H);
+        ctx.filter='none';
+        ctx.restore();
+
+        // Fade to white on break
+        if(t>=ASSEMBLE+HOLD){
+          const td=(t-(ASSEMBLE+HOLD))/BREAK;
+          const fadeOut=easeInOutCubic(clamp(td,0,1));
+          if(fadeOut>0){ctx.save();ctx.globalAlpha=fadeOut;ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);ctx.restore();}
+        }
+
+        if(t+16<lastT)reshuffle(now);
+        lastT=t;
+      }
+      init();trackCanvas(canvas);requestAnimationFrame(frame);
+      window.addEventListener('resize',()=>init());
+    })();
+
+  </script>
+</body>
+</html>
