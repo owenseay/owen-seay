@@ -171,6 +171,7 @@
   .thing:nth-child(6) { animation-delay: 0.3s; }
   .thing:nth-child(7) { animation-delay: 0.35s; }
   .thing:nth-child(8) { animation-delay: 0.4s; }
+  .thing:nth-child(9) { animation-delay: 0.45s; }
 
   @keyframes fadeUp {
     from { opacity: 0; translate: 0 16px; }
@@ -259,6 +260,14 @@
       position: static !important;
     }
 
+    .thing:nth-child(even) {
+      margin-top: 12px;
+    }
+
+    .thing:nth-child(3n) {
+      margin-top: -8px;
+    }
+
     .thing:hover {
       transform: scale(1.1);
     }
@@ -320,7 +329,11 @@
       </a>
       <a class="thing" href="https://eandhbridges.com" target="_blank" style="top: 240px; left: 190px; rotate: 4deg;">
         <div class="thing-emoji">🏭</div>
-        <div class="thing-label">Sales Page</div>
+        <div class="thing-label">Need a Bridge?</div>
+      </a>
+      <a class="thing" href="/picture-building" style="top: 240px; left: 370px; rotate: -3deg;">
+        <div class="thing-emoji">🗿</div>
+        <div class="thing-label">How to AI</div>
       </a>
     </div>
 
