@@ -11,6 +11,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Picture-Building" />
   <meta name="twitter:description" content="You build pictures to make sense of things that matter to you. AI is just a new set of tools." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <style>
     :root {
       --bg: #f6f8ff;
@@ -1132,7 +1133,7 @@
         offCtx.restore();
 
         // Composite offscreen result onto main canvas
-        ctx.drawImage(offCanvas, 0, 0);
+        ctx.drawImage(offCanvas, 0, 0, W, H);
 
         // Head arrowhead — stout chevron pointing in the direction of travel
         const headColorT = normAngle(headAngle + Math.PI/2) / (Math.PI * 2);
