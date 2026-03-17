@@ -3,554 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Owen Seay — vibe coding my brains out. Projects, experiments, and things that probably didn't need to exist.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<meta name="description" content="Owen Seay — I figure things out and build them.">
+<meta property="og:title" content="Owen Seay">
+<meta property="og:description" content="I figure things out and build them.">
+<meta property="og:image" content="https://owenseay.com/corn_sack_frames.webp">
+<meta property="og:url" content="https://owenseay.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Owen Seay">
+<meta name="twitter:description" content="I figure things out and build them.">
+<meta name="twitter:image" content="https://owenseay.com/corn_sack_frames.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <title>Owen Seay</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
 
   body {
-    background: #fff;
+    background: #fafafa;
     color: #1a1a1a;
     font-family: 'Inter', -apple-system, sans-serif;
-    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
   }
 
-  /* -- top bar -- */
-  .top-bar {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    padding: 14px 20px;
-    background: #1a1a1a;
-  }
-
-  .top-bar span {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  @media (max-width: 500px) {
-    .top-bar { gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .top-bar span { font-size: 10px; letter-spacing: 1.5px; }
-  }
-
-  /* -- hero photo -- */
-  .hero {
-    width: 100%;
-    max-height: 70vh;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .hero img {
-    width: 100%;
-    height: 130%;
-    object-fit: cover;
-    object-position: center 30%;
-    display: block;
-    will-change: transform;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
-    background: linear-gradient(transparent, #fff);
-    pointer-events: none;
-  }
-
-  /* -- thought bubble -- */
-  .thought-bubble {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 10px 20px;
-    border-radius: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    z-index: 1;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-
-  .thought-text {
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    letter-spacing: 0.2px;
-  }
-
-  .thought-cursor {
-    display: inline-block;
-    width: 1.5px;
-    height: 16px;
-    background: #333;
-    vertical-align: text-bottom;
-    margin-left: 1px;
-    animation: blink 0.8s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  /* -- content -- */
-  .content {
-    max-width: 600px;
+  /* -- layout -- */
+  .page {
+    max-width: 640px;
     margin: 0 auto;
-    padding: 0 24px 80px;
-    position: relative;
+    padding: 80px 24px 60px;
+  }
+
+  /* -- header -- */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 64px;
+  }
+
+  .header-photo {
+    width: 140px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    border: 2px solid #eee;
+  }
+
+  .header-text {
+    flex: 1;
+  }
+
+  .name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    color: #1a1a1a;
   }
 
   .intro {
-    margin: -40px 0 56px;
-    position: relative;
-    z-index: 1;
-    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #666;
   }
 
-  .intro h1 {
-    font-family: 'Inter', -apple-system, sans-serif;
-    font-size: 52px;
-    font-weight: 900;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    font-style: italic;
-    transform: rotate(-2deg);
-    margin-bottom: 10px;
+  /* -- projects -- */
+  .projects {
+    margin-bottom: 80px;
   }
 
-  .intro p {
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  /* -- scattered icons -- */
-  .things {
-    position: relative;
-    max-width: 500px;
-    margin: 0 auto 80px;
-    height: 450px;
-  }
-
-  .thing {
-    position: absolute;
-    text-decoration: none;
-    transition: transform 0.2s ease, translate 0.2s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards;
-  }
-
-  .thing:nth-child(1) { animation-delay: 0.05s; }
-  .thing:nth-child(2) { animation-delay: 0.1s; }
-  .thing:nth-child(3) { animation-delay: 0.15s; }
-  .thing:nth-child(4) { animation-delay: 0.2s; }
-  .thing:nth-child(5) { animation-delay: 0.25s; }
-  .thing:nth-child(6) { animation-delay: 0.3s; }
-  .thing:nth-child(7) { animation-delay: 0.35s; }
-  .thing:nth-child(8) { animation-delay: 0.4s; }
-  .thing:nth-child(9) { animation-delay: 0.45s; }
-  .thing:nth-child(10) { animation-delay: 0.5s; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; translate: 0 16px; }
-    to { opacity: 1; translate: 0 0; }
-  }
-
-  .thing:hover {
-    transform: scale(1.2);
-  }
-
-  .thing:hover .thing-icon,
-  .thing:hover .thing-emoji {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .thing-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 14px;
-    object-fit: contain;
-    background: #f5f5f5;
-    padding: 8px;
-    transition: box-shadow 0.2s ease;
-  }
-
-  .thing-emoji {
-    width: 72px;
-    height: 72px;
-    border-radius: 14px;
-    background: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    transition: box-shadow 0.2s ease;
-  }
-
-  .thing-label {
+  .section-label {
     font-size: 11px;
     font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: #999;
-    text-align: center;
-    margin-top: 4px;
-    letter-spacing: 0.3px;
+    margin-bottom: 32px;
+  }
+
+  .project {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .project:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .project-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+
+  .project-description {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  .project-link {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1.5px solid #1a1a1a;
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .project-link:hover {
+    color: #666;
+    border-color: #666;
+  }
+
+  /* -- contact -- */
+  .contact {
+    padding-top: 16px;
+  }
+
+  .contact .section-label {
+    margin-bottom: 20px;
+  }
+
+  .contact-text {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 24px;
+    max-width: 460px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1.5px solid #1a1a1a;
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .contact-link:hover {
+    color: #666;
+    border-color: #666;
   }
 
   /* -- footer -- */
   .footer {
-    font-size: 13px;
-    text-align: center;
-  }
-
-  .footer p {
-    color: #999;
-    margin-bottom: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .footer a {
-    color: #999;
-    text-decoration: none;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .footer a:hover {
-    color: #1a1a1a;
-    border-color: #1a1a1a;
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #ccc;
   }
 
   /* -- responsive -- */
   @media (max-width: 500px) {
-    .hero { max-height: 50vh; }
-    .intro h1 { font-size: 28px; }
-    .content { padding: 0 20px 60px; }
-
-    .things {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      height: auto;
-    }
-
-    .thing {
-      position: static !important;
-    }
-
-    .thing:nth-child(even) {
-      margin-top: 12px;
-    }
-
-    .thing:nth-child(3n) {
-      margin-top: -8px;
-    }
-
-    .thing:hover {
-      transform: scale(1.1);
-    }
-
-    .thing:hover .thing-icon,
-    .thing:hover .thing-emoji {
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+    .page { padding: 48px 20px 40px; }
+    .intro { font-size: 17px; }
+    .header-photo { width: 110px; }
+    .header { gap: 20px; }
+    .header { margin-bottom: 48px; }
+    .projects { margin-bottom: 56px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <span>Exploring the future of work with AI</span>
-  </div>
+  <div class="page">
 
-  <div class="hero">
-    <img src="corn_sack_frames.webp" alt="Owen">
-    <div class="thought-bubble">
-      <span class="thought-text" id="thought"></span><span class="thought-cursor"></span>
-    </div>
-  </div>
-
-  <div class="content">
-    <div class="intro">
-      <h1>Owen Seay</h1>
-      <p>Vibe coding my brains out</p>
+    <div class="header">
+      <img class="header-photo" src="corn_sack_frames.webp" alt="Owen Seay">
+      <div class="header-text">
+        <div class="name">Owen Seay</div>
+        <div class="intro">I figure things out and build them.</div>
+      </div>
     </div>
 
-    <div class="things">
-      <a class="thing" href="https://emptytoothpastetubes.com" target="_blank" style="top: 12px; left: 30px; rotate: -4deg;">
-        <div class="thing-emoji">🪥</div>
-        <div class="thing-label">Tubes</div>
-      </a>
-      <a class="thing" href="https://shot-sim.netlify.app" target="_blank" style="top: 5px; left: 200px; rotate: 3deg;">
-        <img class="thing-icon" src="pistol-icon.png" alt="Tap 2 Shoot">
-        <div class="thing-label">Tap 2 Shoot</div>
-      </a>
-      <a class="thing" href="https://ceiling-fan.netlify.app" target="_blank" style="top: 25px; left: 370px; rotate: -2deg;">
-        <div class="thing-emoji">🪭</div>
-        <div class="thing-label">Ceiling Fan</div>
-      </a>
-      <a class="thing" href="https://chairverse.netlify.app" target="_blank" style="top: 140px; left: 80px; rotate: 5deg;">
-        <div class="thing-emoji">🪑</div>
-        <div class="thing-label">Chairverse</div>
-      </a>
-      <a class="thing" href="https://banana-portal.netlify.app" target="_blank" style="top: 125px; left: 260px; rotate: -6deg;">
-        <div class="thing-emoji">🍌</div>
-        <div class="thing-label">Go banananas</div>
-      </a>
-      <a class="thing" href="https://owenseay.github.io/stock-checker/" target="_blank" style="top: 155px; left: 410px; rotate: 2deg;">
-        <div class="thing-emoji">🖥️</div>
-        <div class="thing-label">Stock Checker</div>
-      </a>
-      <a class="thing" href="https://donut-cam.netlify.app" target="_blank" style="top: 230px; left: 20px; rotate: -3deg;">
-        <div class="thing-emoji">🍩</div>
-        <div class="thing-label">Donut Cam</div>
-      </a>
-      <a class="thing" href="https://eandhbridges.com" target="_blank" style="top: 240px; left: 190px; rotate: 4deg;">
-        <div class="thing-emoji">🏭</div>
-        <div class="thing-label">Need a Bridge?</div>
-      </a>
-      <a class="thing" href="/picture-building" style="top: 280px; left: 370px; rotate: -3deg;">
-        <div class="thing-emoji">🗿</div>
-        <div class="thing-label">How to AI</div>
-      </a>
-      <a class="thing" href="https://klr-trip.netlify.app" target="_blank" style="top: 340px; left: 120px; rotate: 3deg;">
-        <div class="thing-emoji">🏍️</div>
-        <div class="thing-label">Moto Trip</div>
-      </a>
+    <div class="projects">
+      <div class="project">
+        <div class="project-title">The KLR Trip</div>
+        <div class="project-description">
+          I bought a motorcycle from a corn farmer and rode it 5,000+ miles across the country. Turned the resulting GPS data into a scroll-driven interactive experience with real-time map animation, elevation profile, and media overlays at waypoints.
+        </div>
+        <a class="project-link" href="https://klr-trip.netlify.app" target="_blank">View project</a>
+        <a class="project-link" href="https://www.google.com/maps/d/edit?mid=1meAOckP4gL5ylz8jKcYeaZffiI6lqLM&usp=sharing" target="_blank" style="margin-left: 16px;">Raw GPS data</a>
+      </div>
+
+      <div class="project">
+        <div class="project-title">Banana Vibes</div>
+        <div class="project-description">
+          A generative art experiment. 247 watercolor bananas seeded with a deterministic pseudorandom number generator that gives each one permanent DNA via 37 unique parameters. Seven distinct animation engines with real-time physics.         </div>
+        <a class="project-link" href="https://bananavibes.lol" target="_blank">View project</a>
+      </div>
     </div>
 
-    <div class="footer">
-      <a id="email-link"></a>
+    <div class="contact">
+      <div class="contact-text">
+        Need to figure something out?
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" id="email-link" href="#">Email</a>
+        <a class="contact-link" href="#" id="cal-link">Book a call</a>
+      </div>
     </div>
+
+    <div class="footer">Owen Seay</div>
+
   </div>
 
 <script>
-  const thoughts = [
-    "why do hospitals smell like that",
-    "a vending machine but for soil",
-    "wait how do birds sleep",
-    "the opposite of a door",
-    "concrete tastes like something probably",
-    "what year did forks happen",
-    "a parking lot is just a field with rules",
-    "glue but emotional",
-    "do fish get thirsty",
-    "the sound gravel makes when you're unsure",
-    "someone invented the staircase and just moved on",
-    "magnets don't make any sense",
-    "a map of every place I've stood",
-    "rubber bands remember their shape",
-    "the last person to use a payphone",
-    "what's heavier silence or fog",
-    "corners are just walls disagreeing",
-    "a clock for something other than time",
-    "sand is just patient rocks",
-    "the texture of tuesday",
-    "who decided which side of the road",
-    "a bridge is just a floor with ambition",
-    "elevators are rooms that move",
-    "cold water sounds different than hot water",
-    "the space between a thought and a thing",
-    "batteries die but where do they go",
-    "a window is a wall that gave up",
-    "the weight of an empty room",
-    "shoes remember your feet",
-    "what does the bottom of the ocean smell like",
-    "a shelf is just a floor for objects",
-    "the color of 3am",
-    "someone had to name orange twice",
-    "what if mirrors are just tired",
-    "the sound a shadow would make",
-    "pillows are just soft furniture",
-    "who was the first person to wave",
-    "a hallway is a room that forgot to stop",
-    "ice is just formal water",
-    "the last dinosaur didn't know",
-    "a ceiling is a floor for nobody",
-    "pockets are rooms for hands",
-    "what if gravity just stopped for a second",
-    "the person who invented zero had nothing",
-    "a knot is just rope with anxiety",
-    "rain but horizontal",
-    "the exact center of a forest",
-    "what do ants think clouds are",
-    "a cup is a bowl with ambition",
-    "the last thing edison forgot",
-    "somewhere a door is opening right now",
-    "socks are just foot bags",
-    "the feeling of almost remembering",
-    "a fence is a wall with gaps on purpose",
-    "steam is just water that got excited",
-    "what if trees are bored",
-    "the oldest water on earth",
-    "a tunnel is a bridge that gave up on the view",
-    "somebody somewhere is blinking right now",
-    "what if corners didn't exist",
-    "a key is just a tiny sculpture that opens things",
-    "the distance between two thoughts",
-    "paper used to be a tree and nobody talks about it",
-    "an attic is just a house's hat",
-    "the sound of one hand doing nothing",
-    "what if roads are just long driveways",
-    "a candle is a slow light",
-    "the first person to sneeze must have been terrified",
-    "a basement is a house's secret",
-    "dust is just everything slowly",
-    "what if chairs could walk",
-    "a thermos doesn't know if it's hot or cold",
-    "the space between two buildings",
-    "somebody built the first wall and then what",
-    "a puddle is a temporary lake",
-    "the color of a sound you forgot",
-    "what if escalators are just lazy stairs",
-    "a calendar is a countdown to nothing specific",
-    "the first person to find a cave",
-    "a rug is just a blanket for the floor",
-    "what if ceilings were transparent",
-    "the weight of a promise",
-    "a roof is just an upside down floor",
-    "someone is always the farthest person north",
-    "a lamp is just a tiny sun on a stick",
-    "the smell of the number seven",
-    "what if nothing was round",
-    "a spoon is just a tiny bowl with a handle",
-    "the first person to see snow",
-    "somewhere a lightbulb just burned out",
-    "a drawer is just a box that lives in furniture",
-    "the feeling right before you forget something",
-    "a zipper is just teeth that cooperate",
-    "what if air had a flavor",
-    "a staircase is just a ramp that gave up",
-    "the last payphone is somewhere right now",
-    "a towel is just a blanket for water",
-    "what if wheels were square",
-    "the oldest door still in use",
-    "a cloud is just sky furniture",
-    "the speed of forgetting",
-    "what if paint could hear",
-    "a mattress is just a body shelf",
-    "the first person to see their reflection",
-    "a whistle is just a scream with manners",
-    "what if fences could talk",
-    "the temperature of a secret",
-    "a chimney is just a tube for smoke",
-    "what if silence had a shape",
-    "a backpack is just a wearable room",
-    "the exact middle of the night",
-    "a hinge is just a joint for doors",
-    "what if you could pour a thought into a cup",
-    "a compass doesn't know where you want to go",
-    "the last person to lick a stamp",
-    "a blade of grass doesn't know about the lawn",
-    "what if walls could remember",
-    "the smell of distance",
-    "a receipt is just a tiny story about money",
-    "what if all clocks stopped for one second",
-    "a shoelace is just a tiny rope with a job",
-    "the weight of attention",
-    "a sidewalk is just a skinny road for people",
-    "what if ladders went down",
-    "somewhere right now a door is stuck",
-    "a handle is just something to hold that holds something",
-    "what if every floor was slightly tilted",
-    "a bookmark is just a flat finger",
-    "the sound of a room with nobody in it",
-    "a trash can is just a container with low self-esteem",
-    "what if you could hear colors growing",
-    "a driveway is just a road that ends at your house",
-    "the first person to be bored",
-    "a button is just a tiny lever",
-    "what if nothing had edges",
-    "a mailbox is just a tiny house for paper",
-    "the feeling of a word you can't find",
-    "a curtain is just a soft wall",
-    "what if tables could float",
-    "a lid is just a door for containers",
-    "the shape of next week",
-    "a garage is just a bedroom for cars",
-    "what if every wall was a different color",
-    "a gutter is just a tiny river on your house",
-    "somewhere a pen just ran out of ink",
-    "a pillar is just a wall that got thin",
-    "the temperature of forgetting",
-    "a balcony is just a floor with a view",
-    "what if ceilings were lower on tuesdays",
-    "a doorbell is just a button that yells",
-    "the distance between here and almost here",
-  ];
-
-  const el = document.getElementById('thought');
-  let queue = [];
-
-  function pick() {
-    if (queue.length === 0) {
-      queue = [...thoughts];
-      for (let i = queue.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [queue[i], queue[j]] = [queue[j], queue[i]];
-      }
-    }
-    return queue.pop();
-  }
-
-  async function type(text) {
-    for (let i = 0; i <= text.length; i++) {
-      el.textContent = text.slice(0, i);
-      await new Promise(r => setTimeout(r, 45 + Math.random() * 40));
-    }
-    await new Promise(r => setTimeout(r, 1800));
-    for (let i = text.length; i >= 0; i--) {
-      el.textContent = text.slice(0, i);
-      await new Promise(r => setTimeout(r, 25));
-    }
-    await new Promise(r => setTimeout(r, 400));
-  }
-
-  async function run() {
-    while (true) { await type(pick()); }
-  }
-
-  run();
-
-  // Parallax hero
-  const heroImg = document.querySelector('.hero img');
-  const hero = document.querySelector('.hero');
-  window.addEventListener('scroll', () => {
-    const rect = hero.getBoundingClientRect();
-    if (rect.bottom > 0) {
-      const speed = 0.4;
-      heroImg.style.transform = `translateY(${window.scrollY * speed}px)`;
-    }
-  }, { passive: true });
-
-  // Obfuscate email from bots
+  // Obfuscate email
   const e = document.getElementById('email-link');
   const u = 'hello'; const d = 'owenseay.com';
   e.href = 'mai' + 'lto:' + u + '@' + d;
-  e.textContent = u + '@' + d;
+
+  // Calendar link placeholder — replace with your Calendly or Cal.com URL
+  const c = document.getElementById('cal-link');
+  c.href = 'https://calendly.com/owenseay'; // UPDATE THIS
 </script>
 </body>
 </html>
