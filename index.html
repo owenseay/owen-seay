@@ -241,29 +241,16 @@
       </div>
     </div>
 
-    <div class="contact">
-      <div class="contact-text">
-        Need to figure something out?
-      </div>
-      <div class="contact-links">
-        <a class="contact-link" id="email-link" href="#">Email</a>
-        <a class="contact-link" href="#" id="cal-link" target="_blank" rel="noopener">Book a call</a>
-      </div>
-    </div>
-
-    <div class="footer">Owen Seay</div>
+<div class="footer">Owen Seay · <a id="footer-email" href="#" style="color: #bbb; text-decoration: none; border-bottom: 1px solid #ddd;">email</a></div>
 
   </div>
 
 <script>
-  // Obfuscate email
-  const e = document.getElementById('email-link');
+  // Obfuscate footer email
   const u = 'hello'; const d = 'owenseay.com';
-  e.href = 'mai' + 'lto:' + u + '@' + d;
-
-  // Calendar link placeholder — replace with your Calendly or Cal.com URL
-  const c = document.getElementById('cal-link');
-  c.href = 'https://cal.com/owenseay';
+  const f = document.getElementById('footer-email');
+  f.href = 'mai' + 'lto:' + u + '@' + d;
+  f.textContent = u + '@' + d;
 </script>
 </body>
 </html>
