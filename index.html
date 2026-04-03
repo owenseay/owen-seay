@@ -16,38 +16,37 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <title>Owen Seay</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: #ffffff;
-    color: #1a1a1a;
-    font-family: 'Montserrat', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.6;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
   }
 
   /* -- layout -- */
   .page {
     max-width: 640px;
     margin: 0 auto;
-    padding: 80px 24px 60px;
+    padding: 60px 24px 60px;
   }
 
   /* -- header -- */
   .header {
     display: flex;
-    align-items: center;
-    gap: 28px;
-    margin-bottom: 64px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 56px;
   }
 
   .header-photo {
     width: 140px;
     flex-shrink: 0;
-    border-radius: 12px;
-    border: 2px solid #eee;
+    border-radius: 0;
+    border: none;
   }
 
   .header-text {
@@ -55,22 +54,17 @@
   }
 
   .name {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-    color: #1a1a1a;
-  }
-
-  .intro {
-    font-size: 20px;
-    color: #666;
-    line-height: 1.4;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 1.2;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   /* -- projects -- */
   .projects {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
 
   .section-label {
@@ -83,9 +77,9 @@
   }
 
   .project {
-    margin-bottom: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ccc;
   }
 
   .project:last-child {
@@ -95,104 +89,66 @@
   }
 
   .project-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #cc0000;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   .project-description {
     font-size: 15px;
-    color: #666;
-    line-height: 1.6;
+    color: #000;
+    line-height: 1.7;
     margin-bottom: 16px;
-    max-width: 520px;
   }
 
   .project-link {
     display: inline-block;
     font-size: 13px;
-    font-weight: 500;
-    color: #1a1a1a;
+    font-weight: normal;
+    color: #000;
     text-decoration: none;
-    border-bottom: 1.5px solid #1a1a1a;
+    border-bottom: 1px solid #000;
     padding-bottom: 1px;
     transition: color 0.2s, border-color 0.2s;
   }
 
   .project-link:hover {
-    color: #666;
-    border-color: #666;
-  }
-
-  .project-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: #e85d2a;
-    background: rgba(232, 93, 42, 0.08);
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-
-  /* -- contact -- */
-  .contact {
-    padding-top: 16px;
-  }
-
-  .contact .section-label {
-    margin-bottom: 20px;
-  }
-
-  .contact-text {
-    font-size: 17px;
-    color: #666;
-    margin-bottom: 24px;
-    max-width: 460px;
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .contact-link {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1.5px solid #1a1a1a;
-    padding-bottom: 1px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .contact-link:hover {
-    color: #666;
-    border-color: #666;
+    color: #cc0000;
+    border-color: #cc0000;
   }
 
   /* -- footer -- */
   .footer {
-    margin-top: 80px;
-    padding-top: 24px;
-    border-top: 1px solid #eee;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
     font-size: 12px;
-    color: #bbb;
+    color: #999;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .footer a {
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .footer a:hover {
+    color: #cc0000;
+    border-color: #cc0000;
   }
 
   /* -- responsive -- */
   @media (max-width: 500px) {
-    .page { padding: 48px 20px 40px; }
-    .intro { font-size: 17px; }
+    .page { padding: 40px 20px; }
+    .name { font-size: 32px; }
     .header-photo { width: 110px; }
     .header { gap: 20px; }
-    .header { margin-bottom: 48px; }
-    .projects { margin-bottom: 56px; }
+    .project-title { font-size: 20px; }
   }
 </style>
 </head>
@@ -201,7 +157,7 @@
   <div class="page">
 
     <div class="header">
-      <img class="header-photo" src="corn_sack_frames.webp" alt="Owen Seay">
+      <img class="header-photo" src="splithead.png" alt="Owen Seay">
       <div class="header-text">
         <div class="name">Owen Seay</div>
       </div>
@@ -217,7 +173,7 @@
       <div class="project">
         <div class="project-title">The KLR Trip</div>
         <div class="project-description">
-          I bought a motorcycle from a corn farmer and rode it 5,000+ miles across the country. Turned the resulting GPS data into a scroll-driven interactive experience with real-time map animation, elevation profile, and media overlays at waypoints.
+          Bought a motorcycle from a corn farmer and rode it 5,000+ miles across the country. Turned the resulting GPS data into a scroll-driven interactive experience with real-time map animation, elevation profile, media overlays at waypoints, and a fly that buzzes around.
         </div>
         <a class="project-link" href="https://klr-trip.netlify.app" target="_blank">View project</a>
         <a class="project-link" href="https://www.google.com/maps/d/edit?mid=1meAOckP4gL5ylz8jKcYeaZffiI6lqLM&usp=sharing" target="_blank" style="margin-left: 16px;">Raw GPS data</a>
@@ -226,7 +182,7 @@
       <div class="project">
         <div class="project-title">Walls of Mexico</div>
         <div class="project-description">
-          100 walls photographed in Yucatán, Mexico. Each wall's dominant color was extracted and mapped to a pixel. Generative patterns flow, sort, and scatter the pixels across a canvas. Click a color to see a wall. Click the pin to stand in front of it.
+          I photographed a bunch of walls in Yucatán, Mexico. Each wall's dominant color was extracted and mapped to a pixel. Generative patterns flow, sort, and scatter the pixels across a canvas. Click a color to see a wall. Click the pin to stand in front of it.
         </div>
         <a class="project-link" href="https://wallsofmexico.com" target="_blank">View project</a>
         <a class="project-link" href="https://www.google.com/maps/d/edit?mid=1u_EndtPn8d0-tveL6hRX7oNKR7HPfl0&usp=sharing" target="_blank" style="margin-left: 16px;">Wall locations</a>
@@ -235,13 +191,13 @@
       <div class="project">
         <div class="project-title">Banana Vibes</div>
         <div class="project-description">
-          A generative art experiment. 247 watercolor bananas seeded with a deterministic pseudorandom number generator that gives each one permanent DNA via 37 unique parameters. Seven distinct animation engines with real-time physics.
+          A completely pointless experiment involving 247 watercolor bananas seeded with a deterministic pseudorandom number generator that gives each one permanent DNA via 37 unique parameters. Seven distinct animation engines with real-time physics.
         </div>
         <a class="project-link" href="https://bananavibes.lol" target="_blank">View project</a>
       </div>
     </div>
 
-<div class="footer">Owen Seay · <a id="footer-email" href="#" style="color: #bbb; text-decoration: none; border-bottom: 1px solid #ddd;">email</a></div>
+<div class="footer">Owen Seay · <a id="footer-email" href="#">email</a></div>
 
   </div>
 
