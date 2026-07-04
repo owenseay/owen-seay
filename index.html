@@ -3,156 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Owen Seay — Exploring the future of work today.">
-<meta property="og:title" content="Owen Seay">
-<meta property="og:description" content="Exploring the future of work today.">
-<meta property="og:image" content="https://owenseay.com/corn_sack_frames.webp">
+<meta name="description" content="From bananas to bridges: four examples of turning real-world material into digital things.">
+<meta property="og:title" content="Owen Seay — What's Your Material?">
+<meta property="og:description" content="From bananas to bridges: four examples of turning real-world material into digital things.">
+<meta property="og:image" content="https://owenseay.com/owen-skatepark.jpg">
 <meta property="og:url" content="https://owenseay.com">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Owen Seay">
-<meta name="twitter:description" content="Exploring the future of work today.">
-<meta name="twitter:image" content="https://owenseay.com/corn_sack_frames.webp">
+<meta name="twitter:title" content="Owen Seay — What's Your Material?">
+<meta name="twitter:description" content="From bananas to bridges: four examples of turning real-world material into digital things.">
+<meta name="twitter:image" content="https://owenseay.com/owen-skatepark.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
-<title>Owen Seay</title>
+<title>Owen Seay — What's Your Material?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --paper: #faf8f4;
+    --ink: #1c1b19;
+    --muted: #6f6b64;
+    --accent: #3d5a80;
+    --accent-dark: #2c445f;
+    --rule: #e6e2da;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
   body {
-    background: #ffffff;
-    color: #000000;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.7;
-    font-size: 15px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    line-height: 1.65;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* -- layout -- */
   .page {
-    max-width: 640px;
+    max-width: 660px;
     margin: 0 auto;
-    padding: 60px 24px 60px;
+    padding: 72px 24px 96px;
   }
 
-  /* -- header -- */
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 56px;
-  }
+  p { margin-bottom: 20px; }
+  p:last-child { margin-bottom: 0; }
 
-  .header-photo {
-    width: 110px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: none;
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(61, 90, 128, 0.35);
+    transition: color 0.18s, border-color 0.18s;
+  }
+  a:hover { color: var(--accent-dark); border-color: var(--accent-dark); }
+
+  /* -- hero -- */
+  .hero { text-align: center; margin-bottom: 56px; }
+
+  .hero-photo {
+    width: 240px;
+    max-width: 70%;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
-    aspect-ratio: 1;
+    border-radius: 10px;
+    margin: 0 auto 36px;
+    display: block;
   }
 
-  .header-text {
-    flex: 1;
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 10vw, 4.1rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
 
-  .name {
-    font-size: 12px;
-    font-weight: bold;
-    width: 110px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 1.2;
-    color: #000;
-    font-family: Arial, Helvetica, sans-serif;
+  .hero-sub {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.08rem;
+    max-width: 30ch;
+    margin: 0 auto;
+  }
+
+  /* -- jump nav -- */
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  .jump a {
+    padding: 7px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: transparent;
+  }
+  .jump a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* -- intro -- */
+  .intro {
+    margin-bottom: 8px;
+    font-size: 1.02rem;
   }
 
   /* -- projects -- */
-  .projects {
-    margin-bottom: 60px;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 32px;
-  }
-
-  .project {
-    margin-bottom: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .project:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
+  .project { scroll-margin-top: 24px; margin-top: 72px; }
+  .closing { margin-top: 72px; }
 
   .project-title {
-    font-size: 24px;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 6vw, 2.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 6px;
+  }
+
+  .project-url {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+
+  .project-photo {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 28px;
+  }
+
+  .project-body { font-size: 1.02rem; }
+
+  .materials {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .materials b {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .project-links {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    font-size: 0.95rem;
+  }
+
+  /* -- closing -- */
+  .closing-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .uses {
+    list-style: none;
+    margin: 8px 0 0;
+  }
+  .uses li {
+    position: relative;
+    padding-left: 26px;
     margin-bottom: 12px;
-    color: #cc0000;
-    text-transform: uppercase;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.0rem;
+  }
+  .uses li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
   }
 
-  .project-description {
-    font-size: 15px;
-    color: #000;
-    line-height: 1.7;
-    margin-bottom: 16px;
+  .contact {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
   }
-
-  .project-link {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: normal;
-    color: #000;
-    text-decoration: none;
-    border-bottom: 1px solid #000;
-    padding-bottom: 1px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .project-link:hover {
-    color: #cc0000;
-    border-color: #cc0000;
+  .contact-email {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
   }
 
   /* -- footer -- */
   .footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid #ccc;
-    font-size: 12px;
-    color: #999;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .footer a {
-    color: #999;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .footer a:hover {
-    color: #cc0000;
-    border-color: #cc0000;
+    margin-top: 64px;
+    font-size: 0.85rem;
+    color: var(--muted);
   }
 
   /* -- responsive -- */
-  @media (max-width: 500px) {
-    .page { padding: 40px 20px; }
-    .name { font-size: 32px; }
-    .header-photo { width: 110px; }
-    .header { gap: 20px; }
-    .project-title { font-size: 20px; }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .page { padding: 48px 20px 72px; }
+    .project { margin-top: 52px; }
+    .closing { margin-top: 52px; }
+    .project-links { gap: 16px; }
   }
 </style>
 </head>
@@ -160,55 +226,165 @@
 
   <div class="page">
 
-    <div class="header">
-      <img class="header-photo" src="chained.jpeg" alt="Owen Seay">
-      <div class="header-text">
-        <div class="name">Owen Seay</div>
-      </div>
-    </div>
+    <!-- HERO -->
+    <header class="hero">
+      <img class="hero-photo" src="owen-skatepark.jpg" alt="Owen Seay pointing, at a skatepark">
+      <h1 class="hero-title">What's Your Material?</h1>
+      <p class="hero-sub">From bananas to bridges: four examples of turning real-world material into digital things.</p>
+      <nav class="jump" aria-label="Jump to a project">
+        <a href="#banana">Banana</a>
+        <a href="#motorcycle">Motorcycle</a>
+        <a href="#walls">Walls</a>
+        <a href="#bridges">Bridges</a>
+      </nav>
+    </header>
 
-    <div class="projects">
-      <div class="project">
-        <div class="project-title">Empty Toothpaste Tubes</div>
-        <a class="project-link" href="https://emptytoothpastetubes.com" target="_blank">View project</a>
-        <a class="project-link" href="https://emptytoothpastetubes.com/notes.html" target="_blank" style="margin-left: 16px;">Notes</a>
-      </div>
+    <!-- INTRO -->
+    <section class="intro">
+      <p>I wrote the following descriptions to provide context around four experimental projects that I recently built using a $100/mth Claude Max subscription.</p>
 
-      <div class="project">
-        <div class="project-title">The KLR Trip</div>
-        <div class="project-description">
-          Bought a motorcycle from a corn farmer and rode it 5,000+ miles across the country. Turned the resulting GPS data into a scroll-driven interactive experience with real-time map animation, elevation profile, media overlays at waypoints, and a fly that buzzes around.
-        </div>
-        <a class="project-link" href="https://klr-trip.netlify.app" target="_blank">View project</a>
-        <a class="project-link" href="https://www.google.com/maps/d/edit?mid=1meAOckP4gL5ylz8jKcYeaZffiI6lqLM&usp=sharing" target="_blank" style="margin-left: 16px;">Raw GPS data</a>
-      </div>
+      <p>The projects may seem unrelated at first: bananas, motorcycles, walls, bridges. But they all follow the same consistent process of taking whatever real-world material is available, finding the hidden structure, and transforming it into something more engaging, useful, or alive with the help of AI.</p>
 
-      <div class="project">
-        <div class="project-title">Walls of Mexico</div>
-        <div class="project-description">
-          I photographed a bunch of walls in Yucatán, Mexico. Each wall's dominant color was extracted and mapped to a pixel. Generative patterns flow, sort, and scatter the pixels across a canvas. Click a color to see a wall. Click the pin to stand in front of it.
-        </div>
-        <a class="project-link" href="https://wallsofmexico.com" target="_blank">View project</a>
-        <a class="project-link" href="https://www.google.com/maps/d/edit?mid=1u_EndtPn8d0-tveL6hRX7oNKR7HPfl0&usp=sharing" target="_blank" style="margin-left: 16px;">Wall locations</a>
-      </div>
+      <p>The purpose of this document is to demonstrate that process and to help you recognize where overlooked material might be hiding in the context of your own work or life—what kind of material do you have, and what could it potentially become?</p>
 
-      <div class="project">
-        <div class="project-title">Banana Vibes</div>
-        <div class="project-description">
-          A completely pointless experiment involving 247 watercolor bananas seeded with a deterministic pseudorandom number generator that gives each one permanent DNA via 37 unique parameters. Seven distinct animation engines with real-time physics.
-        </div>
-        <a class="project-link" href="https://bananavibes.lol" target="_blank">View project</a>
-      </div>
-    </div>
+      <p>I built each project from scratch, starting with a simple idea or objective and a clear set of constraints, then iterating toward a final version. No premade templates or designs were used.</p>
 
-<div class="footer">Owen Seay · <a id="footer-email" href="#">email</a></div>
+      <p>Work like this once would have required a small team of developers, designers, testers, copywriters, and project managers, along with months of coordination and a substantial budget. I was able to build these projects myself in about a month, going directly from idea to execution without waiting on handoffs, approvals, or anyone getting back to me. And most notably, it was a lot of <em>fun</em>! Whether AI is good or bad I don't know, but it undeniably changes what one person can do.</p>
+
+      <p>The websites will load fine on mobile but a desktop experience is best. If you notice any bugs or have any suggestions, feel free to send me a message and let me know! Links throughout the descriptions point to specific reference pages or "materials" that were used.</p>
+    </section>
+
+
+    <!-- PROJECT 1 -->
+    <article class="project" id="banana">
+      <h2 class="project-title">1. Banana Vibes</h2>
+      <div class="project-url"><a href="https://bananavibes.lol" target="_blank" rel="noopener">bananavibes.lol</a></div>
+      <img class="project-photo" src="banana.jpg" alt="A watercolor-painted paper banana held in hand">
+      <div class="project-body">
+        <p>I was interested in the idea of taking a simple analog object and using it as the foundation for a more complex, digital creation. The object I decided to use was a banana that I painted at my kitchen table with watercolors—what could be more simple!</p>
+
+        <p>I took a photo of the paper banana and then collaborated with AI to develop seven distinct animation engines with real-time physics. Once complete, I then designed and built a simple website dedicated to the animations (or <em>vibes</em>), as well as a "<a href="https://bananavibes.lol/technical" target="_blank" rel="noopener">technical companion</a>" that describes how each of them works. The standard .com domain extension would have cost $5,000, so instead I went with one I've never seen before....lol.</p>
+
+        <p>A few years ago I was living in Rochester NY for the summer, and my roommate had just graduated from the school of engineering at Rochester University. One evening he told me the story of how he learned that he's epileptic. Evidently he had been smoking pot one night with some friends when he suddenly fell to the ground and started convulsing. When the seizure was finally over he said the only way he could think to describe the experience to his friends was that it felt like, "247 oscillating salmon".</p>
+
+        <p>So when I was trying to decide how many bananas should be drawn to the animation canvases, I remembered my roommate's story and went with 247 bananas.</p>
+
+        <p>What stuck with me most about this project was how the process of building it felt equally intuitive as painting the watercolor banana itself. Two completely different mediums and outputs yet the process and feeling of making both was the same.</p>
+      </div>
+      <p class="materials"><b>Materials:</b> watercolor banana, phone photo, cut-out paper object, animation ideas, real-time physics constraints, AI-generated code, seven distinct "vibe" engines, technical documentation</p>
+      <div class="project-links">
+        <a href="https://bananavibes.lol" target="_blank" rel="noopener">View project</a>
+      </div>
+    </article>
+
+
+    <!-- PROJECT 2 -->
+    <article class="project" id="motorcycle">
+      <h2 class="project-title">2. The KLR Trip</h2>
+      <div class="project-url"><a href="https://klr-trip.netlify.app" target="_blank" rel="noopener">klr-trip.netlify.app</a></div>
+      <img class="project-photo" src="motorcycle.jpg" alt="A loaded Kawasaki KLR motorcycle in the desert">
+      <div class="project-body">
+        <p>I bought an old Kawasaki motorcycle on Craigslist and rode it 5,200 miles from Washington State to Florida. The route that I traveled was improvised each day, and at night I slept on the ground, beside the motorcycle. It took me 16 days.</p>
+
+        <p>After the trip I went back and plotted <a href="https://www.google.com/maps/d/edit?mid=1meAOckP4gL5ylz8jKcYeaZffiI6lqLM&usp=sharing" target="_blank" rel="noopener">my improvised route</a> in Google Maps. I used that resulting GPS data to build a scroll-driven interactive experience with real-time map animation, an elevation profile along the bottom of the screen, various display mode toggles, clickable waypoints with photo &amp; video overlays, and a counter for displaying rear tire rotations based on the dimensions of the same <a href="https://www.revzilla.com/motorcycle/shinko-700-dual-sport-tires" target="_blank" rel="noopener">Shinko 5.10x17</a> that I used for the trip.</p>
+
+        <p>If you click the <strong>HOME</strong> button on the outro screen, you'll hear an audio recording of me starting up the motorcycle!</p>
+
+        <p>On the first morning of the trip I woke up next to Lake Crescent, on the Olympic Peninsula. As I was rolling up my sleeping bag, a passing fisherman asked me where I was headed. When I told him Florida, he said, "That's a lotta bugs n dust." So on the intro and outro screens you'll notice a tiny bug flying around and landing on the text—programming the behavior of that bug was probably the most difficult part of this project!</p>
+      </div>
+      <p class="materials"><b>Materials:</b> 5,200-mile route, KML/elevation data, photos/videos, waypoints, motorcycle audio, trip story</p>
+      <div class="project-links">
+        <a href="https://klr-trip.netlify.app" target="_blank" rel="noopener">View project</a>
+        <a href="https://www.google.com/maps/d/edit?mid=1meAOckP4gL5ylz8jKcYeaZffiI6lqLM&usp=sharing" target="_blank" rel="noopener">Raw GPS data</a>
+      </div>
+    </article>
+
+
+    <!-- PROJECT 3 -->
+    <article class="project" id="walls">
+      <h2 class="project-title">3. Walls of Mexico</h2>
+      <div class="project-url"><a href="https://wallsofmexico.com" target="_blank" rel="noopener">wallsofmexico.com</a></div>
+      <img class="project-photo" src="wall.jpg" alt="A photographed Mexican wall in a wooden frame">
+      <div class="project-body">
+        <p>While I was traveling in the Yucatán I stumbled into a small city called Valladolid—near the Mayan ruins of Chichén Itzá. I was inspired by all the different textures, materials, and colors that make up the city's rich colonial architecture and spent several days walking around the streets, photographing various walls that caught my eye. As my collection of wall photos grew, I got the idea to print them and build wooden frames for them. So with the help of local Mayan carpenters, we cut and assembled over 800 pieces of wood! "<em>Loco!</em>", they called me.</p>
+
+        <p>Unfortunately there turned out to be termites living inside the wood that we used, so all the framed photos were destroyed before I had a chance to hang them!</p>
+
+        <p>In response to the insects I had the entire collection of 100 photos professionally printed and framed back in the US, where they are currently sitting in boxes. They have not been displayed yet.</p>
+
+        <p>I wanted to build a website dedicated to the walls of Mexico but instead of just turning the collection of photos into a generic gallery, I thought it would be interesting to repurpose them into some type of complimentary digital experience, which could then be engaged with on its own, or together, alongside the framed physical photos (when they're eventually displayed somewhere).</p>
+
+        <p>The idea I came up with was using AI to extract and map each wall's dominant color back to a single pixel. Doing that for each photo gives you a <a href="https://docs.google.com/spreadsheets/d/1tfYFyuq056xVHIzv6K4E4rFIosVYxACW/edit?usp=sharing&ouid=101296784945248788146&rtpof=true&sd=true" target="_blank" rel="noopener">unique palette of 100 colors</a> that represent the walls. Using those colors, I then built a single webpage where generative patterns flow, sort, and scatter across the screen. When you click a color the wall that corresponds with that color is displayed in a lightbox.</p>
+
+        <p>There are three buttons at the bottom of the page: <strong>GENERATE</strong> cycles through the different pattern types, <strong>VIDEO</strong> pulls up <a href="https://www.youtube.com/watch?v=bJJ_WOLfjdA" target="_blank" rel="noopener">the video footage that I filmed</a> and stitched together in Valladolid while I was doing the project, and <strong>ABOUT</strong> provides a description of the project and details about how the website works.</p>
+
+        <p>When the frames are eventually displayed on a wall somewhere, my plan is to get a wide angle photo of them that can be embedded on the website and tie everything together—it will be a single photo of all the photos I took of walls, hanging on a wall, displayed on a website dedicated to walls!</p>
+      </div>
+      <p class="materials"><b>Materials:</b> 100 wall photos, Mexico travel, architectural textures, carpentry, failed physical framing project, process footage, termites, color extraction, generative pattern logic, physical prints waiting to be displayed</p>
+      <div class="project-links">
+        <a href="https://wallsofmexico.com" target="_blank" rel="noopener">View project</a>
+        <a href="https://www.google.com/maps/d/edit?mid=1u_EndtPn8d0-tveL6hRX7oNKR7HPfl0&usp=sharing" target="_blank" rel="noopener">Wall locations</a>
+      </div>
+    </article>
+
+
+    <!-- PROJECT 4 -->
+    <article class="project" id="bridges">
+      <h2 class="project-title">4. Bridge Landing Page</h2>
+      <div class="project-url"><a href="https://eandhbridges.com" target="_blank" rel="noopener">eandhbridges.com</a></div>
+      <img class="project-photo" src="bridge.jpg" alt="A pre-engineered steel bridge under fabrication">
+      <div class="project-body">
+        <p>While reading about local businesses in Charleston WV, I became particularly interested in a small company that fabricates equipment for the oil and gas industry. I reached out to the company and spoke with the owner for a while about what they do. This led me to building a simple landing page for one of the lesser known products they've been manufacturing and selling for the past 20 years—pre-engineered bridges!</p>
+
+        <p>The landing page is meant to be a tool that helps educate potential customers about their bridges. It includes pictures, videos, and an embedded quote request form.</p>
+
+        <p>For fun, I even used Claude to build <a href="https://eandhbridges.com/bridge-model-animation/" target="_blank" rel="noopener">a nifty little animation</a> to help visualize how the bridge panels are constructed (it only works properly on wider screens)! It's hard to believe that I was able to build such a complex animation by simply sharing a blueprint drawing with Claude and describing with text what I want.</p>
+
+        <p>On the backend of the website I used Claude to build a small sample of programmatic SEO pages based on the 2025 National Bridge Inventory data, including graphs and tables. The sample comprises <a href="https://eandhbridges.com/bridge-conditions/" target="_blank" rel="noopener">a single parent page</a> that explains the overall condition of bridges across America and how the government's rating system works. At the bottom of that page there are links to 15 subsequent child pages that focus on states with the poorest ratings, while offering an explanation as to why they struggle.</p>
+
+        <p>I built an additional AI workflow that generates programmatic pages by combining potential industry use-cases, by state, with different bridge models. All of the pages use the same template, but by changing the state, application, and bridge model, you end up with lots of interesting possibilities! You can see <a href="https://eandhbridges.com/solutions/" target="_blank" rel="noopener">those pages here</a>.</p>
+      </div>
+      <p class="materials"><b>Materials:</b> business context, product history, bridge photos/videos, manufacturing details, bridge specs, quote form logic, National Bridge Inventory data, state-level infrastructure patterns, programmatic SEO page structure</p>
+      <div class="project-links">
+        <a href="https://eandhbridges.com" target="_blank" rel="noopener">View project</a>
+      </div>
+    </article>
+
+
+    <!-- CLOSING -->
+    <section class="closing">
+      <h2 class="closing-title">Got Material?</h2>
+      <p>Together, these projects are less about any one subject and more about a consistent way of working: finding the material, shaping it into something clear, and using AI to go from idea to execution faster and more economically than would have been possible before.</p>
+
+      <p>If you have a question or need help with a project or challenge, send me a message and I'll take a look. I'm happy to help if I can. If it turns into paid work, that would be a separate conversation.</p>
+
+      <p>These are some places I may be useful:</p>
+      <ul class="uses">
+        <li>Making sense of scattered material, unclear goals, and hidden constraints</li>
+        <li>Translating rough ideas into clear direction and next steps</li>
+        <li>Finding the clearest angle or story inside a project</li>
+        <li>Turning ideas into websites, demos, documents, visuals, or prototypes</li>
+        <li>Explaining technical or complicated work in a way people can understand</li>
+        <li>Developing customized systems, processes, and workflows</li>
+        <li>Cleaning up messy data, spreadsheets, records, or documents so they can be searched, analyzed, explained, or used</li>
+        <li>Using AI tools to research, write, design, analyze, and build faster</li>
+        <li>Creating small public experiments that help an idea start moving</li>
+        <li>Giving an extra set of eyes to something you're trying to figure out</li>
+      </ul>
+
+      <div class="contact">
+        <a class="contact-email" id="contact-email" href="#">email</a>
+      </div>
+    </section>
+
+    <footer class="footer">Owen Seay</footer>
 
   </div>
 
 <script>
-  // Obfuscate footer email
+  // Obfuscate email
   const u = 'hello'; const d = 'owenseay.com';
-  const f = document.getElementById('footer-email');
+  const f = document.getElementById('contact-email');
   f.href = 'mai' + 'lto:' + u + '@' + d;
   f.textContent = u + '@' + d;
 </script>
